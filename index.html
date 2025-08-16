@@ -1248,12 +1248,27 @@
 
     /* Show modal */
     .modal-overlay.show {
-      opacity: 1;
-      visibility: visible;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto;
+      z-index: 2000;
     }
-
     .modal-overlay.show .modal-container {
-      transform: translateY(0);
+      transform: translateY(0) !important;
+      opacity: 1 !important;
+      pointer-events: auto;
+      display: block !important;
+    }
+    .modal-overlay .modal-container {
+      opacity: 1;
+      pointer-events: auto;
+      transition: transform 0.3s, opacity 0.3s;
+      display: block;
+    }
+    .modal-overlay .modal-content {
+      opacity: 1 !important;
+      display: block !important;
+      transform: none !important;
     }
 
     @media (max-width: 640px) {
@@ -1325,7 +1340,7 @@
       </button>
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="services.html">Services</a>
         <a href="#why">Why</a>
         <a href="#process">Process</a>
         <a href="#team">Team</a>
@@ -1382,7 +1397,7 @@
         <div class="kicker">About Amahle VisaPro Solutions</div>
         <h2>Welcome to Professional Visa Consulting</h2>
         <p class="muted">Amahle VisaPro Solutions is a professional visa consulting agency dedicated to helping individuals, families, and professionals travel legally and confidently. 
-            We specialize in tourist visas, study visas, work permits, and e-Visas for destinations around the world including the USA, UK, 
+            We specialize in tourist visas, study visas, work permits, and e-Visas for destinations around the world including UK, 
             Canada, Schengen Zone and more.</p>
         <p><a class="btn-primary" href="#contact">Learn More</a></p>
         <div class="rating small">
@@ -1710,7 +1725,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
-    // Ensure both desktop and mobile Consult buttons open the modal
+    // Unified modal open/close for both desktop and mobile consult buttons
     document.addEventListener('DOMContentLoaded', function() {
       var consultBtnDesktop = document.getElementById('consultBtnDesktop');
       var consultBtnMobile = document.querySelector('.mobile-only.btn-primary');

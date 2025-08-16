@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Services — Amahle VisaPro Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* --- Begin Navbar Styles from index.html --- */
+    header.site-head{
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.site-head.scrolled {
+      background-color: rgba(250, 243, 229, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .logo-ico {
+      width: 60px;
+      height: 60px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 24px;
+      color: #de5738;
+      line-height: 1;
+    }
+    .brand-title .subtitle {
+      display: block;
+      color: #4b453f;
+      font-weight: 500;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    nav.site-nav{display:flex;gap:18px;align-items:center;flex:1;justify-content:center}
+    nav.site-nav .nav-links{display:flex;gap:18px;align-items:center}
+    nav.site-nav a{
+      color:#4b453f;
+      text-decoration:none;
+      font-weight:600;
+      position: relative;
+      padding: 6px 4px;
+      transition: all 0.3s ease;
+    }
+    nav.site-nav a:not(.btn-ghost):after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, #55888b, #e89438);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav.site-nav a:not(.btn-ghost):hover {
+      color: #55888b;
+      transform: translateY(-1px);
+    }
+    nav.site-nav a:not(.btn-ghost):hover:after {
+      width: 100%;
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid #55888b;
+      color:#55888b;
+      padding:10px 14px;
+      border-radius:10px;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost:hover {
+      background: linear-gradient(to right, #55888b, #e89438);
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(85, 136, 139, 0.2);
+    }
+    .btn-primary{
+      background: linear-gradient(to right, #55888b, #7fa7a9);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:12px;
+      border:none;
+      font-weight:700;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(to right, #7fa7a9, #55888b);
+    }
+    @media (max-width:980px){
+      header.site-head {
+        padding: 16px 0;
+      }
+      .logo-ico {
+        width: 50px;
+        height: 50px;
+      }
+      .brand-title {
+        font-size: 20px;
+      }
+    }
+    @media (max-width:768px){
+      header.site-head {
+        justify-content: space-between;
+        padding: 12px 20px;
+      }
+      .site-nav {
+        order: 2;
+        margin-left: auto;
+      }
+      .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        margin-right: 0;
+        width: 44px;
+        height: 44px;
+        background: none;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1001;
+        margin-left: auto;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+      .mobile-menu-toggle:hover {
+        background-color: rgba(232, 148, 56, 0.1);
+      }
+      .hamburger {
+        display: block;
+        position: relative;
+        width: 24px;
+        height: 2px;
+        background: #e89438;
+        transition: all 0.3s ease;
+        margin: 10px 0;
+      }
+      .hamburger::before,
+      .hamburger::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background: #e89438;
+        transition: all 0.3s ease;
+        left: 0;
+      }
+      .hamburger::before {
+        top: -8px;
+      }
+      .hamburger::after {
+        bottom: -8px;
+      }
+      .mobile-menu-toggle.active .hamburger {
+        background: transparent;
+      }
+      .mobile-menu-toggle.active .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+        background: #de5738;
+      }
+      .mobile-menu-toggle.active .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+        background: #de5738;
+      }
+      nav.site-nav .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 360px;
+        height: 100vh;
+        background: #faf3e5;
+        padding: 80px 32px 32px;
+        flex-direction: column;
+        gap: 24px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        z-index: 1000;
+        justify-content: flex-start;
+      }
+      nav.site-nav .nav-links.active {
+        right: 0;
+      }
+      nav.site-nav .nav-links a {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+        font-size: 18px;
+        padding: 12px 0;
+      }
+      nav.site-nav .nav-links.active a {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      nav.site-nav .nav-links a:not(.btn-ghost):after {
+        display: none;
+      }
+      nav.site-nav .nav-links .btn-ghost {
+        margin-top: 20px;
+        text-align: center;
+        padding: 14px 20px;
+      }
+      .logo {
+        gap: 8px;
+      }
+      .nav-links.active {
+        right: 0;
+      }
+      .nav-links a {
+        font-size: 18px;
+        width: 100%;
+        text-align: left;
+      }
+      .nav-links .btn-ghost {
+        width: 100%;
+        text-align: center;
+        margin-top: 16px;
+      }
+      /* Add overlay when menu is open */
+      .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+      .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    @media (max-width:560px){
+      header.site-head {
+        padding: 12px 0;
+      }
+      .logo-ico {
+        width: 40px;
+        height: 40px;
+      }
+      .brand-title {
+        font-size: 18px;
+      }
+      .brand-title .subtitle {
+        font-size: 12px;
+      }
+    }
+    /* --- End Navbar Styles from index.html --- */
+    body {
+      background: linear-gradient(180deg, #faf3e5, #fff);
+      color: #4b453f;
+    }
+    .services-hero {
+      padding: 120px 0 40px 0;
+      text-align: center;
+    }
+    .services-hero h1 {
+      font-size: 44px;
+      color: #e89438;
+      margin-bottom: 18px;
+    }
+    .services-hero p {
+      color: #776f68;
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    .services-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: 40px 0 80px 0;
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(75,69,63,0.08);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.3s, transform 0.3s;
+      position: relative;
+      min-height: 220px;
+    }
+    .service-card:hover {
+      box-shadow: 0 20px 40px rgba(18,18,18,0.12);
+      transform: translateY(-5px);
+    }
+    .service-card h3 {
+      color: #e89438;
+      font-size: 22px;
+      margin: 0 0 12px 0;
+      font-weight: 700;
+    }
+    .service-card p {
+      color: #776f68;
+      font-size: 16px;
+      margin: 0;
+    }
+    @media (max-width:980px) {
+      .services-bento {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+    @media (max-width:600px) {
+      .services-bento {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .services-hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-head wrap">
+    <div class="logo">
+      <!-- small SVG globe + plane icon -->
+      <svg viewBox="0 0 64 64" class="logo-ico" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#F08A4B"/>
+            <stop offset="1" stop-color="#E0492C"/>
+          </linearGradient>
+        </defs>
+        <circle cx="32" cy="32" r="28" fill="url(#g1)"/>
+        <!-- grid lines -->
+        <g stroke="#FFFFFF" stroke-width="2.5" fill="none">
+          <path d="M6 32h52"/>
+          <path d="M32 6v52"/>
+          <path d="M12 12c12 10 28 10 40 0"/>
+          <path d="M12 52c12-10 28-10 40 0"/>
+        </g>
+        <!-- plane -->
+        <path d="M12 46c16-8 32-20 40-24" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M38 22 l10 -7 l7 2 l-7 7z" fill="#FFFFFF"/>
+      </svg>
+      <div class="brand">
+        <div class="brand-title">
+          Amahle
+          <span class="subtitle">VisaPro Solutions</span>
+        </div>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="index.html#why">Why</a>
+        <a href="index.html#process">Process</a>
+        <a href="index.html#team">Team</a>
+        <a class="btn-ghost" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="services-hero">
+      <h1>Our Services</h1>
+      <p>Visa solutions for every journey — private, business, group, and more. Explore our full range of services below.</p>
+    </section>
+    <section class="services-bento">
+      <div class="service-card">
+        <h3>Private Visa Application</h3>
+        <p>We facilitate Tourist/Holiday travel visas for private clients as well as our corporate travellers.</p>
+      </div>
+      <div class="service-card">
+        <h3>Business Travel Visa</h3>
+        <p>Visas Unlimited assists you with Business Travel Visa applications.</p>
+      </div>
+      <div class="service-card">
+        <h3>Holiday Travel Visa</h3>
+        <p>Going for a holiday? Let our friendly consultants handle your visa application.</p>
+      </div>
+      <div class="service-card">
+        <h3>Group Travel Visa</h3>
+        <p>Are you travelling as a group? We make it easy for you to apply for your visa.</p>
+      </div>
+      <div class="service-card">
+        <h3>Visa Tracking Online</h3>
+        <p>Our online tracking system allows you to remain informed throughout the visa application process.</p>
+      </div>
+      <div class="service-card">
+        <h3>Collection From Home/Office</h3>
+        <p>Our capable courier team will collect documents and deliver your visa to your doorstep.</p>
+      </div>
+      <div class="service-card">
+        <h3>Authentication of Educational documents</h3>
+        <p>Verification of Education documents issued within the Republic of South Africa by registered institutions.</p>
+      </div>
+      <div class="service-card">
+        <h3>British passport applications</h3>
+        <p>We Assist with British passport applications.</p>
+      </div>
+      <div class="service-card">
+        <h3>Irish passport applications</h3>
+        <p>We Assist with Irish passport applications.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- No modal on services page -->
+  <script src="script.js"></script>
+</body>
+</html>
