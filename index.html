@@ -1333,7 +1333,7 @@
         <a class="btn-primary mobile-only" href="#consultModal">Consult Our Experts</a>
       </div>
     </nav>
-    <button class="btn-primary desktop-only">Consult Our Experts</button>
+    <button class="btn-primary desktop-only" id="consultBtnDesktop" type="button">Consult Our Experts</button>
   </header>
 
   <main class="wrap">
@@ -1709,6 +1709,38 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    // Ensure both desktop and mobile Consult buttons open the modal
+    document.addEventListener('DOMContentLoaded', function() {
+      var consultBtnDesktop = document.getElementById('consultBtnDesktop');
+      var consultBtnMobile = document.querySelector('.mobile-only.btn-primary');
+      var consultModal = document.getElementById('consultModal');
+      var closeBtn = consultModal ? consultModal.querySelector('.modal-close') : null;
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        if (consultModal) {
+          consultModal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeModal(e) {
+        if (e) e.preventDefault();
+        if (consultModal) {
+          consultModal.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      }
+      if (consultBtnDesktop) consultBtnDesktop.addEventListener('click', openModal);
+      if (consultBtnMobile) consultBtnMobile.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (consultModal) {
+        consultModal.addEventListener('click', function(e) {
+          if (e.target === consultModal) closeModal();
+        });
+      }
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -76,47 +76,35 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Modal Handling
+
+// Modal Handling (unified: use .show class only)
 const modal = document.getElementById('consultModal');
-const consultBtn = document.querySelector('header .btn-primary');
-const closeBtn = modal.querySelector('.modal-close');
-const modalContainer = modal.querySelector('.modal-container');
+const consultBtnDesktop = document.getElementById('consultBtnDesktop');
+const consultBtnMobile = document.querySelector('.mobile-only.btn-primary');
+const closeBtn = modal ? modal.querySelector('.modal-close') : null;
 
-// Timeline for modal animation
-const modalTL = gsap.timeline({
-  paused: true,
-  defaults: { duration: 0.4, ease: 'power2.out' }
-});
-
-modalTL
-  .to(modal, { autoAlpha: 1 })
-  .from(modalContainer, { 
-    y: 50,
-    scale: 0.95,
-    opacity: 0,
-  }, '-=0.3')
-  .from('.modal-content > *', {
-    y: 20,
-    opacity: 0,
-    stagger: 0.1
-  }, '-=0.2');
-
-function openModal() {
-  modal.style.visibility = 'visible';
-  document.body.style.overflow = 'hidden';
-  modalTL.play();
+function openModal(e) {
+  if (e) e.preventDefault();
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
 }
-
-function closeModal() {
-  document.body.style.overflow = '';
-  modalTL.reverse();
+function closeModal(e) {
+  if (e) e.preventDefault();
+  if (modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
 }
-
-consultBtn.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) closeModal();
-});
+if (consultBtnDesktop) consultBtnDesktop.addEventListener('click', openModal);
+if (consultBtnMobile) consultBtnMobile.addEventListener('click', openModal);
+if (closeBtn) closeBtn.addEventListener('click', closeModal);
+if (modal) {
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+}
 
 // Form handling
 const consultForm = document.getElementById('consultForm');
