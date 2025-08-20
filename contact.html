@@ -7,15 +7,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg-1: #f9eef8;
+      --bg-1: #faf3e5; /* warm beige */
       --bg-2: #ffffff;
-      --primary: #6b2cd6;
-      --accent: #ff3fa6;
-      --muted: #6b7280;
+      --primary: #55888b; /* teal */
+      --accent: #e89438; /* orange */
+      --accent-2: #de5738; /* orange-red */
+      --text: #4b453f; /* warm gray */
+      --muted: #776f68; /* muted warm gray */
       --card: #ffffff;
-      --shadow: 0 12px 30px rgba(18,18,18,0.08);
+      --shadow: 0 12px 30px rgba(75,69,63,0.08);
       --radius: 18px;
       --container: 1180px;
+    }
+    .phone-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+    .phone-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     *{box-sizing:border-box}
