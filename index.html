@@ -360,13 +360,19 @@
         gap:20px
       }
     }
-    @media (max-width:560px){
-      .services-grid{
-        grid-template-columns:1fr;
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        justify-items: center;
       }
-      .service-card.featured{
-        grid-column:auto;
-        grid-row:auto
+      .service-card,
+      .service-card.featured,
+      .service-card.wide {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        width: 95vw !important;
+        max-width: 420px;
       }
     }
 
@@ -1287,6 +1293,15 @@
     /* small helpers */
     .muted{color:var(--muted)}
     .small{font-size:13px}
+    @media (max-width: 640px) {
+      .services-grid {
+        justify-items: center;
+      }
+      .service-card {
+        width: 95vw !important;
+        max-width: 420px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1661,7 +1676,11 @@
           <div class="footer-col">
             <h4>Contact</h4>
             <p class="small muted">info@visafast.com</p>
-            <p class="small muted">010 427 0686</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin: 12px 0 0 0;">
+              <a href="tel:0101570686">010 157 0686</a>
+              <a href="tel:+27797468567">+27 79 746 8567</a>
+              <a href="tel:+717434048">+27 71 743 4048</a>
+            </div>
           </div>
           <div class="footer-col">
             <h4>Follow Us</h4>
