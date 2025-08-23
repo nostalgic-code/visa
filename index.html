@@ -7,6 +7,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
+    @media (max-width: 640px) {
+      .top-contact-bar { display: none !important; }
+      .nav-links .mobile-contact-bar {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+        align-items: stretch;
+        border-top: 1px solid #e0e0e0;
+      }
+      .nav-links .mobile-contact-bar a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 14px 24px;
+        font-size: 16px;
+        color: var(--text);
+        background: none !important;
+        border-radius: 0 !important;
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background 0.2s, color 0.2s;
+        box-sizing: border-box;
+      }
+      .nav-links .mobile-contact-bar a:last-child {
+        border-bottom: none;
+      }
+      .nav-links .mobile-contact-bar a:hover {
+        background: #f7f7f7;
+        color: var(--primary);
+      }
+      .nav-links .mobile-contact-bar svg {
+        flex-shrink: 0;
+      }
+    }
+    @media (max-width: 640px) {
+      .top-contact-bar a[href^="https://wa.me"] {
+        background: transparent !important;
+        border-radius: 0 !important;
+      }
+    }
     .top-contact-bar {
       width: 100%;
       background: var(--primary);
@@ -18,10 +66,14 @@
       justify-content: center;
       gap: 16px;
       z-index: 1200;
-      position: static;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      flex-wrap: wrap;
     }
     header.site-head {
-      margin-top: 0;
+      margin-top: 44px;
     }
     @media (max-width: 640px) {
       .top-contact-bar {
@@ -846,15 +898,25 @@
       }
     }
 
-    @media (max-width: 768px) {
-      .footer-content {
+    @media (max-width: 640px) {
+      .top-contact-bar {
+        font-size: 13px;
+        padding: 5px 0;
         flex-direction: column;
-        gap: 40px;
+        gap: 8px;
+        align-items: stretch;
+        background: transparent;
       }
-      .footer-brand {
-        max-width: 100%;
-        text-align: center;
+      .top-contact-bar a {
+        justify-content: center;
+        width: 100%;
+        padding: 8px 0;
+        font-size: 15px;
       }
+      header.site-head {
+        margin-top: 44px !important;
+      }
+    }
       .footer-brand .logo {
         justify-content: center;
       }
@@ -870,7 +932,7 @@
       .social-links {
         justify-content: center;
       }
-    }
+  
 
     @media (max-width: 480px) {
       .footer {
@@ -1412,6 +1474,16 @@
         <span class="hamburger"></span>
       </button>
       <div class="nav-links">
+      <div class="mobile-contact-bar" style="display:none">
+        <a href="tel:+27797468567" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="var(--accent-2)"/></svg>
+          <span style="color:var(--primary);font-weight:700;letter-spacing:0.5px;">+27 79 746 8567</span>
+        </a>
+        <a href="https://wa.me/27797468567" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 32 32"><path fill="#25D366" d="M16 3A13 13 0 0 0 4.1 22.6L3 29l6.6-1.1A13 13 0 1 0 16 3Zm7.5 18.5c-.3.8-1.5 1.5-2.1 1.6-.6.1-1.2.2-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.4-5.4-4.7-5.6-4.9-.2-.3-1.3-1.7-1.3-3.2 0-1.5.8-2.2 1.1-2.5.3-.3.6-.4.8-.4.2 0 .4 0 .6.1.2.1.5.7.7 1.2.2.5.7 1.2.7 1.3.1.1.1.2 0 .4-.1.2-.2.3-.3.5-.1.1-.2.2-.1.4.1.2.3.6.7 1 .5.6 1 1.1 1.6 1.4.2.1.3.1.5 0 .2-.1.3-.2.5-.3.2-.1.3-.1.5 0 .2.1 1.2.6 1.4.7.2.1.3.1.4.2.1.1.1.2.1.3-.1.2-.5.7-.7.9Z"/></svg>
+          <span style="color:#25D366;font-weight:700;letter-spacing:0.5px;">WhatsApp</span>
+        </a>
+      </div>
         <a href="#about">About</a>
         <a href="services.html">Services</a>
         <a href="#why">Why</a>
