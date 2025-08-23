@@ -1511,23 +1511,25 @@
         <div class="hero-art" aria-hidden="true"></div>
 
         <div class="apply-card" role="form" aria-label="Apply for visa">
-          <h4>Choose the Destination to Fly!</h4>
-          <input type="text" id="fname" placeholder="Your Name" />
-          <input type="email" id="email" placeholder="Your Email" />
-          <input type="tel" id="phone" placeholder="Phone" />
-          <input type="text" id="country" placeholder="Country" />
-          <select id="visaType" aria-label="Select visa type">
-            <option value="" disabled selected>Select Service Type</option>
-            <option value="tourist">Tourist Visa Applications</option>
-            <option value="student">Student Visa Applications</option>
-            <option value="work">Work Permit Support</option>
-            <option value="digital">Digital Nomad Visas</option>
-            <option value="consultation">One-on-One Consultations</option>
-            <option value="appeal">Visa Refusal Appeal Guidance</option>
-            <option value="eta">eTA/eVisa Applications</option>
-            <option value="document">Document Translation & Support Letters</option>
-          </select>
-          <button id="applyBtn">Apply Now</button>
+          <form action="https://formsubmit.co/bafana@visaproamahle.co.za" method="POST">
+            <h4>Choose the Destination to Fly!</h4>
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <input type="tel" name="phone" placeholder="Phone" required />
+            <input type="text" name="country" placeholder="Country" required />
+            <select name="visaType" aria-label="Select visa type" required>
+              <option value="" disabled selected>Select Service Type</option>
+              <option value="tourist">Tourist Visa Applications</option>
+              <option value="student">Student Visa Applications</option>
+              <option value="work">Work Permit Support</option>
+              <option value="digital">Digital Nomad Visas</option>
+              <option value="consultation">One-on-One Consultations</option>
+              <option value="appeal">Visa Refusal Appeal Guidance</option>
+              <option value="eta">eTA/eVisa Applications</option>
+              <option value="document">Document Translation & Support Letters</option>
+            </select>
+            <button type="submit" id="applyBtn">Apply Now</button>
+          </form>
         </div>
       </div>
     </section>
@@ -1744,27 +1746,27 @@
           <h3>Schedule Your Consultation</h3>
           <p class="modal-subtitle">Tell us about your visa needs, and we'll help you achieve your travel goals.</p>
         </div>
-        <form id="consultForm" class="modal-form">
+  <form id="consultForm" class="modal-form" action="https://formsubmit.co/bafana@visaproamahle.co.za" method="POST">
           <div class="form-grid">
             <div class="form-group">
               <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" required placeholder="Enter your full name">
+              <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
             </div>
             <div class="form-group">
               <label for="emailAddress">Email Address</label>
-              <input type="email" id="emailAddress" required placeholder="Enter your email">
+              <input type="email" id="emailAddress" name="emailAddress" required placeholder="Enter your email">
             </div>
             <div class="form-group">
               <label for="phoneNumber">Phone Number</label>
-              <input type="tel" id="phoneNumber" required placeholder="Enter your phone number">
+              <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter your phone number">
             </div>
             <div class="form-group">
               <label for="nationality">Nationality</label>
-              <input type="text" id="nationality" required placeholder="Your current nationality">
+              <input type="text" id="nationality" name="nationality" required placeholder="Your current nationality">
             </div>
             <div class="form-group full-width">
               <label for="destinationCountry">Destination Country</label>
-              <select id="destinationCountry" required>
+              <select id="destinationCountry" name="destinationCountry" required>
                 <option value="" disabled selected>Select destination country</option>
                 <option value="usa">United States</option>
                 <option value="uk">United Kingdom</option>
@@ -1776,7 +1778,7 @@
             </div>
             <div class="form-group full-width">
               <label for="visaType">Type of Visa</label>
-              <select id="visaType" required>
+              <select id="visaType" name="visaType" required>
                 <option value="" disabled selected>Select visa type</option>
                 <option value="tourist">Tourist Visa</option>
                 <option value="business">Business Visa</option>
@@ -1788,11 +1790,11 @@
             </div>
             <div class="form-group full-width">
               <label for="travelDate">Intended Travel Date</label>
-              <input type="date" id="travelDate" required>
+              <input type="date" id="travelDate" name="travelDate" required>
             </div>
             <div class="form-group full-width">
               <label for="message">Additional Information</label>
-              <textarea id="message" rows="3" placeholder="Tell us more about your visa requirements or any specific questions you have."></textarea>
+              <textarea id="message" name="message" rows="3" placeholder="Tell us more about your visa requirements or any specific questions you have."></textarea>
             </div>
           </div>
           <div class="form-footer">
