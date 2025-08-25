@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Amahle VisaPro Solutions — Professional Visa Consulting</title>
@@ -1502,8 +1503,44 @@
         <h1>Visa Excellence Redefined — Your Pathway to Seamless Global Travel</h1>
         <p class="muted">At Amahle VisaPro Solutions, we believe that every business and traveller deserves a confident journey. Our team of expert consultants guide you through visa applications, appeals, and documentation with clarity and speed.</p>
         <div class="hero-ctas">
-          <button class="btn-primary">Start Your Application</button>
-          <button class="btn-ghost">Book Consultation</button>
+          <button id="openAppModal" class="btn-primary">Start Your Application</button>
+          <a href="contact.html" class="btn-ghost">Book Consultation</a>
+  <!-- Tailwind Modal for Application Form -->
+  <div id="appModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+      <button id="closeAppModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+      <h3 class="text-xl font-bold mb-4 text-center text-primary">Start Your Application</h3>
+      <form action="https://formsubmit.co/bafana@visaproamahle.co.za" method="POST" class="space-y-4">
+        <input type="text" name="name" placeholder="Your Name" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
+        <input type="email" name="email" placeholder="Your Email" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
+        <input type="tel" name="phone" placeholder="Phone" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
+        <input type="text" name="country" placeholder="Country" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
+        <select name="visaType" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+          <option value="" disabled selected>Select Service Type</option>
+          <option value="tourist">Tourist Visa Applications</option>
+          <option value="student">Student Visa Applications</option>
+          <option value="work">Work Permit Support</option>
+          <option value="digital">Digital Nomad Visas</option>
+          <option value="consultation">One-on-One Consultations</option>
+          <option value="appeal">Visa Refusal Appeal Guidance</option>
+          <option value="eta">eTA/eVisa Applications</option>
+          <option value="document">Document Translation & Support Letters</option>
+        </select>
+        <button type="submit" class="w-full bg-primary text-white font-bold py-2 rounded hover:bg-primary-dark transition">Apply Now</button>
+      </form>
+    </div>
+  </div>
+    <script>
+    // Tailwind Modal logic for Application Form
+    const openAppModal = document.getElementById('openAppModal');
+    const appModal = document.getElementById('appModal');
+    const closeAppModal = document.getElementById('closeAppModal');
+    if (openAppModal && appModal && closeAppModal) {
+      openAppModal.addEventListener('click', () => appModal.classList.remove('hidden'));
+      closeAppModal.addEventListener('click', () => appModal.classList.add('hidden'));
+      appModal.addEventListener('click', (e) => { if (e.target === appModal) appModal.classList.add('hidden'); });
+    }
+    </script>
         </div>
       </div>
 
@@ -1517,7 +1554,7 @@
             <input type="email" name="email" placeholder="Your Email" required />
             <input type="tel" name="phone" placeholder="Phone" required />
             <input type="text" name="country" placeholder="Country" required />
-            <select name="visaType" aria-label="Select visa type" required>
+            <select name="visaType" aria-label="Select Service Type" required>
               <option value="" disabled selected>Select Service Type</option>
               <option value="tourist">Tourist Visa Applications</option>
               <option value="student">Student Visa Applications</option>
@@ -1750,19 +1787,19 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+              <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name" />
             </div>
             <div class="form-group">
               <label for="emailAddress">Email Address</label>
-              <input type="email" id="emailAddress" name="emailAddress" required placeholder="Enter your email">
+              <input type="email" id="emailAddress" name="emailAddress" required placeholder="Enter your email" />
             </div>
             <div class="form-group">
               <label for="phoneNumber">Phone Number</label>
-              <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter your phone number">
+              <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter your phone number" />
             </div>
             <div class="form-group">
               <label for="nationality">Nationality</label>
-              <input type="text" id="nationality" name="nationality" required placeholder="Your current nationality">
+              <input type="text" id="nationality" name="nationality" required placeholder="Your current nationality" />
             </div>
             <div class="form-group full-width">
               <label for="destinationCountry">Destination Country</label>
@@ -1790,11 +1827,11 @@
             </div>
             <div class="form-group full-width">
               <label for="travelDate">Intended Travel Date</label>
-              <input type="date" id="travelDate" name="travelDate" required>
+              <input type="date" id="travelDate" name="travelDate" required />
             </div>
             <div class="form-group full-width">
               <label for="message">Additional Information</label>
-              <textarea id="message" name="message" rows="3" placeholder="Tell us more about your visa requirements or any specific questions you have."></textarea>
+              <textarea id="message" name="message" rows="3" required placeholder="Tell us more about your visa requirements or any specific questions you have."></textarea>
             </div>
           </div>
           <div class="form-footer">
