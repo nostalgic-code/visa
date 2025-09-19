@@ -1,13 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_cors import CORS
+import os
 
 db = SQLAlchemy()
 
 def create_app():
-    app = Flask(__name__, 
-                static_folder='../static',  # Point to a static folder at root level
-                static_url_path='')
+    app = Flask(__name__)
     app.config['SECRET_KEY'] = 'your-secret-key'  # Change this to a secure secret key
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///temp.db'  # We'll change this to PostgreSQL later
     
