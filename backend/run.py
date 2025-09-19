@@ -6,8 +6,10 @@ app = create_app()
 
 # Create tables and admin user
 def init_db():
-    with app.app_context():
+    try:
+        # Create all tables
         db.create_all()
+        print("Database tables created successfully")
         
         # Check if admin user exists
         admin = Admin.query.filter_by(email='admin@example.com').first()
@@ -19,6 +21,13 @@ def init_db():
             )
             db.session.add(admin)
             db.session.commit()
+            print("Admin user created successfully")
+        else:
+            print("Admin user already exists")
+    except Exception as e:
+        print(f"Error initializing database: {str(e)}")
+        # Re-raise the exception for proper error handling
+        raise
 
 if __name__ == '__main__':
     init_db()
