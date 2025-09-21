@@ -1553,7 +1553,7 @@
         <div class="hero-art" aria-hidden="true"></div>
 
         <div class="apply-card" role="form" aria-label="Apply for visa">
-          <form id="applyForm" action="https://visa-vq00.onrender.com/api/visa-submissions" method="POST" onsubmit="return false;">
+          <form id="applyForm" action="https://visa-vq00.onrender.com/api/visa-submissions" method="POST">
             <h4>Choose the Destination</h4>
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="email" name="email" placeholder="Your Email" required />
@@ -1915,7 +1915,43 @@
   <script src="script.js"></script>
   <script>
     // Hero section apply form handling
-    document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('load', function() {
+        console.log('Script loaded');
+        const heroForm = document.getElementById('applyForm');
+        console.log('Form element:', heroForm);
+        
+        if (heroForm) {
+            heroForm.addEventListener('submit', async function(e) {
+                console.log('Form submitted');
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const formDataObj = {};
+                formData.forEach((value, key) => formDataObj[key] = value);
+                
+                try {
+                    const response = await fetch('https://visa-vq00.onrender.com/api/visa-submissions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formDataObj)
+                    });
+                    
+                    if (response.ok) {
+                        alert('Form submitted successfully!');
+                        this.reset();
+                    } else {
+                        alert('Error submitting form. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error submitting form. Please try again.');
+                }
+            });
+        }
+    });
+  </script>
         const heroForm = document.getElementById('applyForm');
         if (heroForm) {
             heroForm.addEventListener('submit', async function(e) {
