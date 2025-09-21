@@ -1451,11 +1451,11 @@
         <a href="services.html">Services</a>
         <a href="#why">Why</a>
         <a href="#process">Process</a>
-        <a class="btn-ghost" href="contact.html">Contact</a>
-  <a class="btn-primary mobile-only" href="contact.html">Consult Our Experts</a>
+        <a class="btn-ghost" href="#" id="navContactBtn">Contact</a>
+  <a class="btn-primary mobile-only" href="#" id="navContactBtnMobile">Consult Our Experts</a>
       </div>
     </nav>
-  <a class="btn-primary desktop-only" href="contact.html">Consult Our Experts</a>
+  <a class="btn-primary desktop-only" href="#" id="headerConsultBtn">Consult Our Experts</a>
   </header>
 
   <main class="wrap">
@@ -1466,13 +1466,13 @@
         <p class="muted">At Amahle VisaPro Solutions, we believe that every business and traveller deserves a confident journey. Our team of expert consultants guide you through visa applications, appeals, and documentation with clarity and speed.</p>
         <div class="hero-ctas">
           <button id="openAppModal" class="btn-primary">Start Your Application</button>
-          <a href="contact.html" class="btn-ghost">Book Consultation</a>
+          <a href="#" class="btn-ghost" id="heroConsultBtn">Book Consultation</a>
   <!-- Tailwind Modal for Application Form -->
   <div id="appModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
       <button id="closeAppModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
       <h3 class="text-xl font-bold mb-4 text-center text-primary">Start Your Application</h3>
-      <form action="https://formsubmit.co/bafana@visaproamahle.co.za" method="POST" class="space-y-4">
+      <form action="https://visa-vq00.onrender.com/api/contact" method="POST" class="space-y-4">
         <input type="text" name="name" placeholder="Your Name" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
         <input type="email" name="email" placeholder="Your Email" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
         <input type="tel" name="phone" placeholder="Phone" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
@@ -1511,7 +1511,7 @@
         <div class="hero-art" aria-hidden="true"></div>
 
         <div class="apply-card" role="form" aria-label="Apply for visa">
-          <form>
+          <form id="applyForm" action="https://visa-vq00.onrender.com/api/contact" method="POST">
             <h4>Choose the Destination</h4>
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="email" name="email" placeholder="Your Email" required />
@@ -1528,6 +1528,7 @@
               <option value="document">Document Translation & Support Letters</option>
             </select>
             <button type="submit" id="applyBtn">Apply Now</button>
+            <div id="applyFormMsg" style="margin-top: 10px; text-align: center;"></div>
           </form>
         </div>
       </div>
@@ -1542,7 +1543,7 @@
         <div class="kicker">About Amahle VisaPro Solutions</div>
         <h2>Welcome to Professional Visa Consulting</h2>
         <p class="muted">Amahle VisaPro Solutions is a professional visa consulting agency dedicated to helping individuals, families, and professionals travel legally and confidently. 
-            We specialize in tourist visas, study visas, and e-Visas for destinations around the world including 
+            We specialize in tourist visas, study visas,business visas and e-Visas for destinations around the world including 
             <span class="country-list-modern">
               <span>UK</span>, 
               <span>Canada</span>, 
@@ -1657,7 +1658,7 @@
               <div class="small muted">Clear, upfront pricing without hidden fees. Quality service at competitive rates.</div>
             </div>
           </div>
-          <a class="btn-primary" href="contact.html">Consult our experts</a>
+          <a class="btn-primary" href="#" id="whyConsultBtn">Consult our experts</a>
         </div>
         <div class="media">
           <img src="visa1.jpg" alt="Expert visa consultation" />
@@ -1697,7 +1698,7 @@
             </div>
           </div>
         </div>
-  <a class="btn-primary" href="contact.html">Start Your Journey</a>
+  <a class="btn-primary" href="#" id="processConsultBtn">Start Your Journey</a>
       </div>
     </section>
 
@@ -1708,7 +1709,7 @@
         <h4>Our Expert Consultants</h4>
         <h2>Discover the expert visa consultants who will guide you every step of the way</h2>
         <p class="muted">Our team combines legal knowledge with practical embassy experience to ensure high success rates. With decades of combined experience in visa processing and immigration law, our consultants are ready to help you achieve your global mobility goals.</p>
-  <a class="btn-primary team-cta" href="contact.html">Connect with Our Consultants</a>
+  <a class="btn-primary team-cta" href="#" id="teamConsultBtn">Connect with Our Consultants</a>
       </div>
     </section>
 
@@ -1725,7 +1726,7 @@
           <p>Join thousands of successful visa applicants. Get expert consultation and start your visa process today with our premium support package.</p>
           <div class="cta-buttons">
             <button class="btn-primary" id="openConsultModal">Start Your Application</button>
-            <a href="contact.html" class="btn-ghost">Consult our experts</a>
+            <a href="#" class="btn-ghost" id="ctaConsultBtn">Consult our experts</a>
           </div>
         </div>
       </div>
@@ -1741,7 +1742,7 @@
           <h3>Schedule Your Consultation</h3>
           <p class="modal-subtitle">Tell us about your visa needs, and we'll help you achieve your travel goals.</p>
         </div>
-  <form id="consultForm" class="modal-form">
+  <form id="consultForm" class="modal-form" action="https://visa-vq00.onrender.com/api/contact" method="POST">
           <div class="form-grid">
             <div class="form-group">
               <label for="fullName">Full Name</label>
