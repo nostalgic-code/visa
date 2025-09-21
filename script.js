@@ -79,9 +79,20 @@ window.addEventListener('scroll', () => {
 
 // Modal Handling (unified: use .show class only)
 const modal = document.getElementById('consultModal');
-const consultBtnDesktop = document.getElementById('consultBtnDesktop');
-const consultBtnMobile = document.querySelector('.mobile-only.btn-primary');
 const closeBtn = modal ? modal.querySelector('.modal-close') : null;
+
+// Get all consultation buttons
+const consultButtons = [
+  'navContactBtn',
+  'navContactBtnMobile',
+  'headerConsultBtn',
+  'heroConsultBtn',
+  'whyConsultBtn',
+  'processConsultBtn',
+  'teamConsultBtn',
+  'ctaConsultBtn',
+  'openConsultModal'
+].map(id => document.getElementById(id));
 
 function openModal(e) {
   if (e) e.preventDefault();
@@ -90,6 +101,7 @@ function openModal(e) {
     document.body.style.overflow = 'hidden';
   }
 }
+
 function closeModal(e) {
   if (e) e.preventDefault();
   if (modal) {
@@ -97,9 +109,16 @@ function closeModal(e) {
     document.body.style.overflow = '';
   }
 }
-if (consultBtnDesktop) consultBtnDesktop.addEventListener('click', openModal);
-if (consultBtnMobile) consultBtnMobile.addEventListener('click', openModal);
+
+// Add click event to all consultation buttons
+consultButtons.forEach(btn => {
+  if (btn) btn.addEventListener('click', openModal);
+});
+
+// Close modal with close button
 if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+// Close modal when clicking outside
 if (modal) {
   modal.addEventListener('click', function(e) {
     if (e.target === modal) closeModal();
@@ -112,25 +131,18 @@ if (consultForm) {
   consultForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = consultForm.querySelector('.submit-btn');
+    submitBtn.disabled = true;
     submitBtn.textContent = 'Scheduling...';
-    
-    const formData = {
-      fullName: document.getElementById('fullName').value,
-      emailAddress: document.getElementById('emailAddress').value,
-      phoneNumber: document.getElementById('phoneNumber').value,
-      nationality: document.getElementById('nationality').value,
-      destinationCountry: document.getElementById('destinationCountry').value,
-      visaType: document.getElementById('visaType').value,
-      message: document.getElementById('message').value
-    };
+    const formContent = consultForm.querySelector('.form-grid');
     
     try {
-      const response = await fetch('https://visa-vq00.onrender.com/api/visa', {
+      const formData = new FormData(consultForm);
+      const response = await fetch('https://visa-vq00.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(Object.fromEntries(formData))
       });
       
       if (response.ok) {
@@ -185,54 +197,53 @@ cards.forEach((card, i) => {
   });
 });
 
-// Quick apply form handler
-document.getElementById('applyBtn')?.addEventListener('click', async function(e) {
-  e.preventDefault();
-  const name = document.getElementById('fname').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone')?.value.trim() || '';
-  const country = document.getElementById('country')?.value.trim() || '';
-  const visaType = document.getElementById('visaType')?.value || 'Quick Application';
-
-  if(!name || !email) {
-    alert('Please provide name and email');
-    return;
-  }
-
-  this.textContent = 'Applying...';
-  
-  try {
-    const response = await fetch('https://visa-vq00.onrender.com/api/visa', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        country,
-        visaType,
-        message: 'Quick Application'
-      })
-    });
+// Apply form handler
+const applyForm = document.getElementById('applyForm');
+if (applyForm) {
+  applyForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const messageDiv = document.getElementById('applyFormMsg');
+    const submitBtn = document.getElementById('applyBtn');
     
-    if (response.ok) {
-      alert('Application submitted successfully — we will contact you.');
-      document.getElementById('fname').value = '';
-      document.getElementById('email').value = '';
-      if (document.getElementById('phone')) document.getElementById('phone').value = '';
-      if (document.getElementById('country')) document.getElementById('country').value = '';
-    } else {
-      throw new Error('Form submission failed');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    messageDiv.innerHTML = '';
+
+    const name = formData.get('name');
+    const email = formData.get('email');
+
+    if(!name || !email) {
+      alert('Please provide name and email');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Apply Now';
+      return;
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error submitting form. Please try again.');
-  } finally {
-    this.textContent = 'Apply Now';
-  }
-});
+  
+    try {
+      const response = await fetch('https://visa-vq00.onrender.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+      });
+      
+      if (response.ok) {
+        messageDiv.innerHTML = '<div style="color: #4CAF50; margin-top: 10px;">Application submitted successfully! We will contact you soon.</div>';
+        this.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      messageDiv.innerHTML = '<div style="color: #f44336; margin-top: 10px;">Error submitting form. Please try again.</div>';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Apply Now';
+    }
+  });
+}
 
 // contact form handler
 if (document.getElementById('contactForm')) {
