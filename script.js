@@ -212,21 +212,28 @@ if (applyForm) {
 
     const name = formData.get('name');
     const email = formData.get('email');
+    const phone = formData.get('phone');
 
-    if(!name || !email) {
-      alert('Please provide name and email');
+    if(!name || !email || !phone) {
+      alert('Please provide name, email and phone number');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Apply Now';
       return;
     }
   
     try {
-      const response = await fetch('https://visa-vq00.onrender.com/api/contact', {
+      const response = await fetch('https://visa-vq00.onrender.com/api/visa-submissions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(Object.fromEntries(formData))
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          message: formData.get('message') || '',
+          subject: 'Visa Application'
+        })
       });
       
       if (response.ok) {

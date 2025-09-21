@@ -1928,23 +1928,25 @@
                 const formData = new FormData(this);
                 const name = formData.get('name');
                 const email = formData.get('email');
+                const phone = formData.get('phone');
                 const message = formData.get('message') || '';
                 const subject = formData.get('subject') || 'Visa Application';
 
-                if (!name || !email) {
-                    alert('Please provide name and email');
+                if (!name || !email || !phone) {
+                    alert('Please provide name, email and phone number');
                     return;
                 }
 
                 const formDataObj = {
                     name,
                     email,
+                    phone,
                     message,
                     subject
                 };
                 
                 try {
-                    const response = await fetch('https://visa-vq00.onrender.com/api/contact', {
+                    const response = await fetch('https://visa-vq00.onrender.com/api/visa-submissions', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
