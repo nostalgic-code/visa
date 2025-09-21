@@ -197,60 +197,7 @@ cards.forEach((card, i) => {
   });
 });
 
-// Apply form handler
-const applyForm = document.getElementById('applyForm');
-if (applyForm) {
-  applyForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const messageDiv = document.getElementById('applyFormMsg');
-    const submitBtn = document.getElementById('applyBtn');
-    
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
-    messageDiv.innerHTML = '';
 
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-
-    if(!name || !email || !phone) {
-      alert('Please provide name, email and phone number');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Apply Now';
-      return;
-    }
-  
-    try {
-      const response = await fetch('https://visa-vq00.onrender.com/api/visa-submissions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          message: formData.get('message') || '',
-          subject: 'Visa Application'
-        })
-      });
-      
-      if (response.ok) {
-        messageDiv.innerHTML = '<div style="color: #4CAF50; margin-top: 10px;">Application submitted successfully! We will contact you soon.</div>';
-        this.reset();
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      messageDiv.innerHTML = '<div style="color: #f44336; margin-top: 10px;">Error submitting form. Please try again.</div>';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Apply Now';
-    }
-  });
-}
 
 // contact form handler
 if (document.getElementById('contactForm')) {
