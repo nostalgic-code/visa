@@ -4,7 +4,8 @@ $(document).ready(function() {
 
     // Config for different form endpoints
     const FORM_ENDPOINTS = {
-        'applyForm': '/visa-submissions',
+        'modalApplyForm': '/visa-submissions',
+        'quickApplyForm': '/visa-submissions',
         'visaApplicationForm': '/visa-submissions',
         'consultForm': '/contact'
     };
@@ -42,6 +43,9 @@ $(document).ready(function() {
         $submitBtn.prop('disabled', true).text('Submitting...');
         $msgDiv.html('').hide();
 
+        // Store original button text
+        const originalBtnText = $submitBtn.text();
+
         // Submit form
         $.ajax({
             url: API_BASE_URL + endpoint,
@@ -50,7 +54,8 @@ $(document).ready(function() {
             contentType: 'application/json',
             headers: {
                 'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                'Origin': 'https://www.visaproamahle.co.za'
             },
             success: function(response) {
                 $msgDiv.html(`
@@ -86,7 +91,7 @@ $(document).ready(function() {
                 `).show();
             },
             complete: function() {
-                $submitBtn.prop('disabled', false).text('Apply Now');
+                $submitBtn.prop('disabled', false).text(originalBtnText);
             }
         });
     }
