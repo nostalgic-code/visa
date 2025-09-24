@@ -52,19 +52,32 @@ def submit_visa():
 @api.route('/api/contact', methods=['POST'])
 def submit_contact():
     data = request.json
+    print("Received contact form data:", data)  # Debug log
     
-    if not all(key in data for key in ['name', 'email', 'phone', 'subject', 'message']):
-        return jsonify({'error': 'Missing required fields'}), 400
+    try:
+        # Use .get() to handle missing fields safely
+        submission = ContactSubmission(
+            name=data.get('name', ''),
+            email=data.get('email', ''),
+            phone=data.get('phone', ''),
+            subject=data.get('subject', 'Contact Form Submission'),
+            message=data.get('message', '')
+        )
         
-    submission = ContactSubmission(
-        name=data['name'],
-        email=data['email'],
-        phone=data['phone'],
-        subject=data['subject'],
-        message=data['message']
-    )
-    
-    db.session.add(submission)
-    db.session.commit()
-    
-    return jsonify({'message': 'Contact form submitted successfully'}), 201
+        db.session.add(submission)
+        db.session.commit()
+        print("Successfully saved contact submission")  # Debug log
+        
+        return jsonify({
+            'message': 'Contact form submitted successfully',
+            'status': 'success'
+        }), 201
+        
+    except Exception as e:
+        print("Error saving contact submission:", str(e))  # Debug log
+        db.session.rollback()
+        return jsonify({
+            'message': 'Error processing contact form',
+            'error': str(e),
+            'status': 'error'
+        }), 500
