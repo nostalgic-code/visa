@@ -33,12 +33,18 @@ $(document).ready(function() {
             formData.subject = 'Form Submission from Website';
         }
 
-        // Add form source info
+        // Add form metadata to help debugging
         formData.source = window.location.pathname + ' - ' + formId;
+        formData.form_id = formId; // Add explicit form ID field
+        formData.form_type = formId.includes('contact') ? 'contact' : 'visa'; // Categorize the form
         formData.timestamp = new Date().toISOString();
+        formData.submission_date = new Date().toLocaleDateString();
         
         // Add a unique identifier
         formData.submission_id = 'sub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
+        // Add debug info
+        formData.debug_info = 'Submitted using form-handler-v2.js with x-www-form-urlencoded';
 
         // Validation
         const requiredFields = ['name', 'email', 'phone'];
@@ -134,21 +140,23 @@ $(document).ready(function() {
         const useAlternatives = true; // Set to true to try alternative submission approaches
         
         if (useAlternatives) {
-            // First, try a direct fetch POST request with form data instead of JSON
+            // First, try a direct fetch POST request with URLSearchParams (application/x-www-form-urlencoded)
             // This should fix the 415 Unsupported Media Type error
             console.log('ATTEMPTING DIRECT API CALL TO:', API_BASE_URL + endpoint);
             
-            // Convert the formData object to a FormData object for proper form data submission
-            const formDataObj = new FormData();
+            // Convert the formData object to URLSearchParams for proper form data submission
+            const params = new URLSearchParams();
             Object.keys(formData).forEach(key => {
-                formDataObj.append(key, formData[key]);
+                params.append(key, formData[key]);
             });
             
-            // Try a direct POST request with form data (not JSON)
+            // Try a direct POST request with form-urlencoded data
             fetch(API_BASE_URL + endpoint, {
                 method: 'POST',
-                // No Content-Type header - let the browser set it automatically with the boundary
-                body: formDataObj // Send as multipart form data instead of JSON
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded', // Try with form-urlencoded
+                },
+                body: params // Send as url-encoded form data instead of JSON or multipart
             })
             .then(response => {
                 console.log('FETCH RESPONSE STATUS:', response.status);
@@ -183,12 +191,12 @@ $(document).ready(function() {
         console.log('USING CONFIRMED WORKING ENDPOINT: Now submitting to:', endpoint);
         console.log('FULL SUBMISSION URL:', fullUrl);
         
-        // Create a new form to submit directly - using standard form encoding
+        // Create a new form to submit directly - using URL encoded form data
         const $directForm = $('<form>', {
             action: fullUrl,
             method: 'POST',
             target: iframeId,
-            enctype: 'multipart/form-data', // Important: Use multipart/form-data to match server expectations
+            enctype: 'application/x-www-form-urlencoded', // Try with form-urlencoded instead of multipart
             style: 'display:none'
         }).appendTo('body');
         

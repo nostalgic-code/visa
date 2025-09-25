@@ -1472,7 +1472,7 @@
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
       <button id="closeAppModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
       <h3 class="text-xl font-bold mb-4 text-center text-primary">Start Your Application</h3>
-      <form id="modalApplyForm" action="https://visa-vq00.onrender.com/api/visa" method="POST" class="space-y-4">
+      <form id="modalApplyForm" action="https://visa-vq00.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded" class="space-y-4">
         <div id="visaFormMsg" class="form-message hidden mb-4 p-3 rounded"></div>
         <input type="text" name="name" placeholder="Your Name" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
         <input type="email" name="email" placeholder="Your Email" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
@@ -1530,7 +1530,7 @@
         <div class="hero-art" aria-hidden="true"></div>
 
         <div class="apply-card" role="form" aria-label="Apply for visa">
-          <form id="quickApplyForm" action="https://visa-vq00.onrender.com/api/visa" method="POST">
+          <form id="quickApplyForm" action="https://visa-vq00.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded">
             <div class="form-message" style="display: none;"></div>
             <h4>Choose the Destination</h4>
             <input type="text" name="name" placeholder="Your Name" required />
@@ -1762,7 +1762,7 @@
           <h3>Schedule Your Consultation</h3>
           <p class="modal-subtitle">Tell us about your visa needs, and we'll help you achieve your travel goals.</p>
         </div>
-  <form id="consultForm" class="modal-form" action="https://visa-vq00.onrender.com/api/visa" method="POST">
+  <form id="consultForm" class="modal-form" action="https://visa-vq00.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded">
           <div class="form-grid">
             <div class="form-group">
               <label for="fullName">Full Name</label>
