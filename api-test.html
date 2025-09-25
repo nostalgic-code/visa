@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .results {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            min-height: 100px;
+        }
+        
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        select, input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Testing Tool</h1>
+        <p>Use this tool to test the API endpoints for your Amahle VisaPro Solutions website.</p>
+        
+        <div class="test-section">
+            <h2>1. Discover Available Endpoints</h2>
+            <p>Click the button below to test which API endpoints are available on your server.</p>
+            <button id="discoverEndpoints">Discover Endpoints</button>
+            <div id="endpointResults" class="results">
+                <p>Results will appear here...</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. Test Form Submission</h2>
+            <p>Select an endpoint and send test data to verify form submissions.</p>
+            
+            <label for="endpointSelect">Select Endpoint:</label>
+            <select id="endpointSelect">
+                <option value="">Select an endpoint</option>
+                <option value="/api">Base API (/api)</option>
+                <option value="/api/visa-submissions">Visa Submissions (/api/visa-submissions)</option>
+                <option value="/api/submissions">Submissions (/api/submissions)</option>
+                <option value="/api/contact">Contact (/api/contact)</option>
+                <option value="/api/consult">Consult (/api/consult)</option>
+                <option value="/api/consultation">Consultation (/api/consultation)</option>
+                <!-- Add other endpoints here -->
+            </select>
+            
+            <div id="formFields">
+                <label for="testName">Name:</label>
+                <input type="text" id="testName" value="Test User">
+                
+                <label for="testEmail">Email:</label>
+                <input type="email" id="testEmail" value="test@example.com">
+                
+                <label for="testPhone">Phone:</label>
+                <input type="text" id="testPhone" value="+27123456789">
+                
+                <label for="testMessage">Message:</label>
+                <textarea id="testMessage" rows="3" style="width:100%">This is a test submission from the API Testing Tool.</textarea>
+            </div>
+            
+            <button id="sendTestData">Send Test Data</button>
+            <div id="submissionResults" class="results">
+                <p>Submission results will appear here...</p>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="test-section">
+            <h2>API Information</h2>
+            <p>Base URL: <code>https://visa-vq00.onrender.com</code></p>
+            
+            <h3>Common Endpoints:</h3>
+            <ul>
+                <li><code>/api</code> - API root</li>
+                <li><code>/api/visa-submissions</code> - For visa application forms</li>
+                <li><code>/api/contact</code> - For contact forms</li>
+                <li><code>/api/consult</code> - For consultation forms</li>
+                <!-- Add any other known endpoints -->
+            </ul>
+            
+            <p>Note: After testing, update your website's forms to use the correct endpoints that work with your backend.</p>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const API_BASE_URL = 'https://visa-vq00.onrender.com';
+            
+            // Test endpoints to discover which ones are available
+            $('#discoverEndpoints').click(async function() {
+                const $results = $('#endpointResults');
+                $results.html('<p>Testing endpoints...</p>');
+                
+                const endpoints = [
+                    '/api',
+                    '/api/visa-submissions',
+                    '/api/submissions',
+                    '/api/contact',
+                    '/api/consult',
+                    '/api/consultation',
+                    '/api/visa',
+                    '/api/visa-application'
+                ];
+                
+                let resultsHTML = '';
+                
+                for (const endpoint of endpoints) {
+                    try {
+                        const response = await fetch(API_BASE_URL + endpoint, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        const statusText = response.ok ? '✅' : '❌';
+                        resultsHTML += `<p>${statusText} <strong>${endpoint}</strong> - Status: ${response.status}</p>`;
+                    } catch (error) {
+                        resultsHTML += `<p>❌ <strong>${endpoint}</strong> - Error: ${error.message}</p>`;
+                    }
+                }
+                
+                $results.html(resultsHTML || '<p>No endpoints found</p>');
+            });
+            
+            // Test form submission
+            $('#sendTestData').click(async function() {
+                const $results = $('#submissionResults');
+                const endpoint = $('#endpointSelect').val();
+                
+                if (!endpoint) {
+                    $results.html('<p style="color:red;">Please select an endpoint</p>');
+                    return;
+                }
+                
+                $results.html('<p>Sending test data...</p>');
+                
+                // Create test form data
+                const testData = {
+                    name: $('#testName').val(),
+                    email: $('#testEmail').val(),
+                    phone: $('#testPhone').val(),
+                    message: $('#testMessage').val(),
+                    subject: 'API Test Submission',
+                    source: 'api-test-page',
+                    timestamp: new Date().toISOString(),
+                    submission_id: 'test_' + Date.now()
+                };
+                
+                // For logging
+                console.log('Sending test data to:', API_BASE_URL + endpoint);
+                console.log('Test data:', testData);
+                
+                try {
+                    // Try with fetch
+                    const fetchResponse = await fetch(API_BASE_URL + endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(testData)
+                    });
+                    
+                    let responseText = '';
+                    try {
+                        const responseData = await fetchResponse.text();
+                        responseText = responseData;
+                    } catch (e) {
+                        responseText = 'Could not parse response';
+                    }
+                    
+                    $results.html(`
+                        <p><strong>POST to ${endpoint}</strong></p>
+                        <p>Status: ${fetchResponse.status} ${fetchResponse.statusText}</p>
+                        <p>Response: ${responseText}</p>
+                        <hr>
+                        <p>Check your admin dashboard to see if this test submission appears.</p>
+                    `);
+                    
+                } catch (error) {
+                    $results.html(`<p style="color:red;">Error: ${error.message}</p>`);
+                    console.error('API Test Error:', error);
+                    
+                    // Fallback to iframe method
+                    $results.append(`<p>Trying fallback iframe method...</p>`);
+                    submitWithIframe(endpoint, testData);
+                }
+            });
+            
+            // Fallback submission method using iframe
+            function submitWithIframe(endpoint, formData) {
+                const iframeId = 'test_frame_' + Date.now();
+                const $iframe = $('<iframe>', {
+                    name: iframeId,
+                    id: iframeId,
+                    style: 'display:none'
+                }).appendTo('body');
+                
+                const $form = $('<form>', {
+                    action: API_BASE_URL + endpoint,
+                    method: 'POST',
+                    target: iframeId,
+                    style: 'display:none'
+                }).appendTo('body');
+                
+                // Add form fields
+                Object.entries(formData).forEach(([key, value]) => {
+                    $('<input>', {
+                        type: 'hidden',
+                        name: key,
+                        value: value
+                    }).appendTo($form);
+                });
+                
+                // Handle response
+                $iframe.on('load', function() {
+                    $('#submissionResults').append('<p>Iframe submission completed</p>');
+                    setTimeout(() => {
+                        $iframe.remove();
+                        $form.remove();
+                    }, 1000);
+                });
+                
+                // Submit the form
+                $form.submit();
+            }
+        });
+    </script>
+</body>
+</html>
