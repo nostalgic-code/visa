@@ -58,11 +58,20 @@ $(document).ready(function() {
                 'Origin': 'https://www.visaproamahle.co.za'
             },
             success: function(response) {
-                $msgDiv.html(`
-                    <div style="color: #4CAF50; background: #f0fff4; padding: 12px; border-radius: 6px; margin-top: 10px;">
-                        Application submitted successfully! We will contact you soon.
-                    </div>
-                `).show();
+                // Handle different styling for different forms
+                if (formId === 'modalApplyForm') {
+                    $msgDiv.html('Application submitted successfully! We will contact you soon.')
+                        .removeClass('hidden')
+                        .removeClass('bg-red-100 text-red-700')
+                        .addClass('bg-green-100 text-green-700')
+                        .show();
+                } else {
+                    $msgDiv.html(`
+                        <div style="color: #4CAF50; background: #f0fff4; padding: 12px; border-radius: 6px; margin-top: 10px;">
+                            Application submitted successfully! We will contact you soon.
+                        </div>
+                    `).show();
+                }
                 
                 // Show an alert message
                 alert('Application submitted successfully! We will contact you soon.');
@@ -76,6 +85,14 @@ $(document).ready(function() {
                         $modal.removeClass('show');
                     }, 1000);
                 }
+                
+                // If the form is in a Tailwind modal
+                const appModal = document.getElementById('appModal');
+                if (formId === 'modalApplyForm' && appModal) {
+                    setTimeout(() => {
+                        appModal.classList.add('hidden');
+                    }, 2000);
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Form submission error:', error);
@@ -87,11 +104,19 @@ $(document).ready(function() {
                     errorMessage = 'Please check your form details and try again.';
                 }
 
-                $msgDiv.html(`
-                    <div style="color: #f44336; background: #fff5f5; padding: 12px; border-radius: 6px; margin-top: 10px;">
-                        ${errorMessage}
-                    </div>
-                `).show();
+                if (formId === 'modalApplyForm') {
+                    $msgDiv.html(errorMessage)
+                        .removeClass('hidden')
+                        .removeClass('bg-green-100 text-green-700')
+                        .addClass('bg-red-100 text-red-700')
+                        .show();
+                } else {
+                    $msgDiv.html(`
+                        <div style="color: #f44336; background: #fff5f5; padding: 12px; border-radius: 6px; margin-top: 10px;">
+                            ${errorMessage}
+                        </div>
+                    `).show();
+                }
             },
             complete: function() {
                 $submitBtn.prop('disabled', false).text(originalBtnText);
