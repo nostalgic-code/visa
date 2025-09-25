@@ -97,6 +97,20 @@ const consultButtons = [
 function openModal(e) {
   if (e) e.preventDefault();
   if (modal) {
+    // Reset form and button state
+    const consultForm = document.getElementById('consultForm');
+    if (consultForm) {
+      consultForm.reset();
+      const submitBtn = consultForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Schedule Consultation';
+      }
+      // Hide any form messages
+      const msgDiv = consultForm.querySelector('.form-message');
+      if (msgDiv) msgDiv.style.display = 'none';
+    }
+    
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
   }

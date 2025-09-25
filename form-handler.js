@@ -64,6 +64,9 @@ $(document).ready(function() {
                     </div>
                 `).show();
                 
+                // Show an alert message
+                alert('Application submitted successfully! We will contact you soon.');
+                
                 $form[0].reset();
 
                 // If form is in a modal, close it after success
@@ -71,7 +74,7 @@ $(document).ready(function() {
                 if ($modal.length) {
                     setTimeout(() => {
                         $modal.removeClass('show');
-                    }, 2000);
+                    }, 1000);
                 }
             },
             error: function(xhr, status, error) {
