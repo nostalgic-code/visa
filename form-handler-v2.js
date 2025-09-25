@@ -4,10 +4,10 @@ $(document).ready(function() {
 
     // Config for different form endpoints - Map all forms to the correct endpoints
     const FORM_ENDPOINTS = {
-        'modalApplyForm': '/visa-submissions',
-        'quickApplyForm': '/visa-submissions',
-        'visaApplicationForm': '/visa-submissions',
-        'consultForm': '/visa-submissions', // Changed from /consult to /visa-submissions
+        'modalApplyForm': '/submissions',
+        'quickApplyForm': '/submissions',
+        'visaApplicationForm': '/submissions',
+        'consultForm': '/submissions', // Try without 'visa-' prefix
         'contactForm': '/contact'
     };
 
@@ -130,6 +130,41 @@ $(document).ready(function() {
 
     // Submit form using standard HTML form to avoid CORS
     function submitFormWithoutCORS($form, formData, endpoint, successCallback, errorCallback) {
+        // Try alternative submission methods if debug mode is enabled
+        const useAlternatives = true; // Set to true to try alternative submission approaches
+        
+        if (useAlternatives) {
+            // First, try a direct fetch POST request (will likely fail due to CORS but worth trying)
+            console.log('ATTEMPTING DIRECT API CALL TO:', API_BASE_URL + endpoint);
+            
+            // Try a direct POST request
+            fetch(API_BASE_URL + endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                console.log('FETCH RESPONSE STATUS:', response.status);
+                if (response.ok) {
+                    console.log('FETCH SUCCESS! Form submitted successfully via fetch');
+                    return response.text();
+                } else {
+                    console.log('FETCH FAILED with status:', response.status);
+                    throw new Error('Fetch submission failed');
+                }
+            })
+            .then(data => {
+                console.log('FETCH RESPONSE DATA:', data);
+                // Don't call success callback here, we'll let the iframe method handle that
+            })
+            .catch(error => {
+                console.log('FETCH ERROR:', error.message, '- Falling back to iframe method');
+                // Continue with iframe method as fallback
+            });
+        }
+        
         // Create a hidden iframe for the form target
         const iframeId = 'form_target_' + Math.random().toString(36).substr(2, 9);
         const $iframe = $('<iframe>', {
@@ -140,8 +175,8 @@ $(document).ready(function() {
         
         // Log the full URL we're submitting to for debugging
         const fullUrl = API_BASE_URL + endpoint;
-        console.log('FIXED: Submitting to endpoint:', endpoint);
-        console.log('FIXED: Full submission URL:', fullUrl);
+        console.log('UPDATED ENDPOINT: Now submitting to:', endpoint);
+        console.log('UPDATED URL: Full submission URL:', fullUrl);
         
         // Create a new form to submit directly
         const $directForm = $('<form>', {
