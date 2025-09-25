@@ -7,7 +7,8 @@ $(document).ready(function() {
         'modalApplyForm': '/visa-submissions',
         'quickApplyForm': '/visa-submissions',
         'visaApplicationForm': '/visa-submissions',
-        'consultForm': '/contact'
+        'consultForm': '/consult',
+        'contactForm': '/contact'
     };
 
     // Base API URL
@@ -28,8 +29,14 @@ $(document).ready(function() {
         // Add default fields if not present
         if (!formData.subject && formId.includes('apply')) {
             formData.subject = 'Visa Application';
+        } else if (!formData.subject) {
+            formData.subject = 'Form Submission from Website';
         }
 
+        // Add form source info
+        formData.source = window.location.pathname + ' - ' + formId;
+        formData.timestamp = new Date().toISOString();
+        
         // Add a unique identifier
         formData.submission_id = 'sub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
@@ -131,9 +138,13 @@ $(document).ready(function() {
             style: 'display:none'
         }).appendTo('body');
         
+        // Log the full URL we're submitting to for debugging
+        const fullUrl = API_BASE_URL + endpoint;
+        console.log('Submitting to full URL:', fullUrl);
+        
         // Create a new form to submit directly
         const $directForm = $('<form>', {
-            action: API_BASE_URL + endpoint,
+            action: fullUrl,
             method: 'POST',
             target: iframeId,
             style: 'display:none'
@@ -146,18 +157,42 @@ $(document).ready(function() {
                 name: key,
                 value: formData[key]
             }).appendTo($directForm);
+            
+            // Log each field for debugging
+            console.log(`Form field: ${key} = ${formData[key]}`);
+        });
+        
+        // Try to detect any response from the iframe
+        $iframe.on('load', function() {
+            try {
+                const iframeContent = $iframe.contents().find('body').text();
+                console.log('Iframe response:', iframeContent);
+                
+                if (iframeContent.includes('error') || iframeContent.includes('Error')) {
+                    console.error('Error detected in response:', iframeContent);
+                    errorCallback();
+                } else {
+                    console.log('Submission appears successful');
+                    successCallback();
+                }
+            } catch (e) {
+                console.log('Could not access iframe content due to same-origin policy');
+                // Assume success if we can't read the iframe
+                successCallback();
+            }
         });
         
         // Submit the form
         $directForm.submit();
         
-        // Assume success after a timeout (we don't have a reliable way to check)
+        // Fallback: Assume success after a timeout if iframe load event doesn't fire
         setTimeout(function() {
+            console.log('Form submission timeout reached, assuming success');
             successCallback();
             // Clean up
             $iframe.remove();
             $directForm.remove();
-        }, 1500);
+        }, 3000);
     }
 
     // Add message div to forms if not present
