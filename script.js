@@ -83,7 +83,6 @@ const closeBtn = modal ? modal.querySelector('.modal-close') : null;
 
 // Get all consultation buttons
 const consultButtons = [
-  'navContactBtn',
   'navContactBtnMobile',
   'mobileConsultBtn',
   'headerConsultBtn',
