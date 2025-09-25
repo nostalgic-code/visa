@@ -2,12 +2,12 @@
 $(document).ready(function() {
     console.log('Unified form handler loaded v2');
 
-    // Config for different form endpoints
+    // Config for different form endpoints - Map all forms to the correct endpoints
     const FORM_ENDPOINTS = {
         'modalApplyForm': '/visa-submissions',
         'quickApplyForm': '/visa-submissions',
         'visaApplicationForm': '/visa-submissions',
-        'consultForm': '/consult',
+        'consultForm': '/visa-submissions', // Changed from /consult to /visa-submissions
         'contactForm': '/contact'
     };
 
@@ -140,7 +140,8 @@ $(document).ready(function() {
         
         // Log the full URL we're submitting to for debugging
         const fullUrl = API_BASE_URL + endpoint;
-        console.log('Submitting to full URL:', fullUrl);
+        console.log('FIXED: Submitting to endpoint:', endpoint);
+        console.log('FIXED: Full submission URL:', fullUrl);
         
         // Create a new form to submit directly
         const $directForm = $('<form>', {
