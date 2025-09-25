@@ -85,6 +85,7 @@ const closeBtn = modal ? modal.querySelector('.modal-close') : null;
 const consultButtons = [
   'navContactBtn',
   'navContactBtnMobile',
+  'mobileConsultBtn',
   'headerConsultBtn',
   'heroConsultBtn',
   'whyConsultBtn',
