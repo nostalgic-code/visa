@@ -174,6 +174,30 @@ def update_application_status(app_id):
             'message': str(e)
         }), 500
 
+@api_bp.route('/applications/<int:app_id>', methods=['DELETE'])
+@login_required
+def delete_application(app_id):
+    """Delete an application (protected endpoint)"""
+    try:
+        # Get authenticated client
+        auth_client = get_auth_client()
+        if not auth_client:
+            return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+        
+        # Delete from Supabase
+        result = auth_client.table('visa_applications').delete().eq('id', app_id).execute()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Application deleted successfully'
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': str(e)
+        }), 500
+
 # Dashboard Routes
 @dashboard_bp.route('/admin/signup', methods=['GET', 'POST'])
 def signup():
