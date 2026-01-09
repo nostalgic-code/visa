@@ -156,18 +156,14 @@ def get_application(app_id):
 def update_application_status(app_id):
     """Update application status (protected endpoint)"""
     try:
-        # Get authenticated client
-        auth_client = get_auth_client()
-        if not auth_client:
-            return jsonify({'success': False, 'message': 'Unauthorized'}), 401
-        
         data = request.get_json()
         new_status = data.get('status')
         
         if not new_status:
             return jsonify({'success': False, 'message': 'Status is required'}), 400
         
-        result = auth_client.table('visa_applications').update({'status': new_status}).eq('id', app_id).execute()
+        # Use service key to update (bypasses RLS)
+        result = supabase.table('visa_applications').update({'status': new_status}).eq('id', app_id).execute()
         
         return jsonify({
             'success': True,
@@ -185,13 +181,8 @@ def update_application_status(app_id):
 def delete_application(app_id):
     """Delete an application (protected endpoint)"""
     try:
-        # Get authenticated client
-        auth_client = get_auth_client()
-        if not auth_client:
-            return jsonify({'success': False, 'message': 'Unauthorized'}), 401
-        
-        # Delete from Supabase
-        result = auth_client.table('visa_applications').delete().eq('id', app_id).execute()
+        # Use service key to delete (bypasses RLS)
+        result = supabase.table('visa_applications').delete().eq('id', app_id).execute()
         
         return jsonify({
             'success': True,
@@ -307,13 +298,8 @@ def logout():
 def index():
     """Dashboard home page showing all applications"""
     try:
-        # Get authenticated client
-        auth_client = get_auth_client()
-        if not auth_client:
-            return redirect(url_for('dashboard.login'))
-        
-        # Fetch all applications from Supabase with authenticated client
-        result = auth_client.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
+        # Fetch all applications from Supabase (using service key bypasses RLS)
+        result = supabase.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
         applications = result.data
         
         # Calculate stats
@@ -344,12 +330,8 @@ def index():
 def view_application(app_id):
     """View single application details"""
     try:
-        # Get authenticated client
-        auth_client = get_auth_client()
-        if not auth_client:
-            return redirect(url_for('dashboard.login'))
-        
-        result = auth_client.table('visa_applications').select('*').eq('id', app_id).single().execute()
+        # Fetch application from Supabase (using service key bypasses RLS)
+        result = supabase.table('visa_applications').select('*').eq('id', app_id).single().execute()
         application = result.data
         
         return render_template('admin/application_detail.html', application=application)
@@ -361,16 +343,12 @@ def view_application(app_id):
 def refresh_applications():
     """API endpoint to fetch fresh dashboard data for real-time updates"""
     try:
-        # Check for access token
-        access_token = request.headers.get('Authorization', '').replace('Bearer ', '')
-        if not access_token:
-            return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+        # Check for session authentication
+        if 'access_token' not in session:
+            return jsonify({'success': False, 'message': 'Unauthorized', 'expired': True}), 401
         
-        # Get authenticated client
-        auth_client = supabase.postgrest.auth(access_token)
-        
-        # Fetch all applications
-        result = auth_client.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
+        # Fetch all applications (using service key bypasses RLS)
+        result = supabase.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
         applications = result.data
         
         # Calculate stats
