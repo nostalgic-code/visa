@@ -19,9 +19,15 @@ def get_auth_client():
     supabase_key = os.getenv('SUPABASE_KEY')
     auth_client = create_client(supabase_url, supabase_key)
     
-    # Set the auth token for authenticated requests
-    auth_client.postgrest.auth(access_token)
-    return auth_client
+    try:
+        # Set the auth token for authenticated requests
+        auth_client.postgrest.auth(access_token)
+        return auth_client
+    except Exception as e:
+        # If token is invalid or expired, clear session
+        if 'JWT expired' in str(e) or 'invalid' in str(e).lower():
+            session.clear()
+        return None
 
 # Authentication decorator
 def login_required(f):
@@ -326,7 +332,12 @@ def index():
         return render_template('admin/dashboard.html', applications=applications, stats=stats)
         
     except Exception as e:
-        return render_template('admin/dashboard.html', applications=[], stats={}, error=str(e))
+        # Check if JWT expired error
+        error_msg = str(e)
+        if 'JWT expired' in error_msg or 'PGRST303' in error_msg:
+            session.clear()
+            return redirect(url_for('dashboard.login'))
+        return render_template('admin/dashboard.html', applications=[], stats={}, error=error_msg)
 
 @dashboard_bp.route('/admin/application/<int:app_id>')
 @login_required
@@ -380,4 +391,8 @@ def refresh_applications():
         }), 200
         
     except Exception as e:
-        return jsonify({'success': False, 'message': str(e)}), 500
+        error_msg = str(e)
+        # Check if JWT expired
+        if 'JWT expired' in error_msg or 'PGRST303' in error_msg:
+            return jsonify({'success': False, 'message': 'Session expired', 'expired': True}), 401
+        return jsonify({'success': False, 'message': error_msg}), 500

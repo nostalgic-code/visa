@@ -187,9 +187,18 @@
                 if (data.success) {
                     updateStats(data.stats);
                     updateApplicationsTable(data.applications);
+                } else if (data.expired) {
+                    // Session expired, redirect to login
+                    stopAutoRefresh();
+                    showNotification('Session expired. Please login again.', 'error');
+                    setTimeout(() => {
+                        window.location.href = '/admin/login';
+                    }, 2000);
                 }
             })
-            .catch(error => console.error('Refresh error:', error));
+            .catch(error => {
+                console.error('Refresh error:', error);
+            });
         }
         
         function updateStats(stats) {
