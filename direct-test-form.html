@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #4a5568;
+        }
+        
+        .test-form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: #4299e1;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #3182ce;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ebf8ff;
+            border-left: 4px solid #4299e1;
+        }
+        
+        .error {
+            background-color: #fed7d7;
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .success {
+            background-color: #c6f6d5;
+            border-left: 4px solid #38a169;
+        }
+        
+        pre {
+            white-space: pre-wrap;
+            background-color: #edf2f7;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Submission Diagnostic Tool</h1>
+    <p>Use this tool to test different form submission methods and formats to diagnose issues with the admin dashboard.</p>
+
+    <div class="test-form">
+        <h2>Direct Form Submission Test</h2>
+        <form id="directTestForm" action="https://visa-vq00.onrender.com/api/visa" method="POST" target="resultFrame" enctype="application/x-www-form-urlencoded">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="Test User" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="test@example.com" required>
+            
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="+27123456789" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required>Direct form submission test - application/x-www-form-urlencoded</textarea>
+            
+            <label for="visaType">Visa Type:</label>
+            <select id="visaType" name="visaType" required>
+                <option value="tourist">Tourist</option>
+                <option value="business" selected>Business</option>
+                <option value="work">Work</option>
+                <option value="study">Study</option>
+            </select>
+            
+            <!-- Hidden fields -->
+            <input type="hidden" name="subject" value="Direct Test Form">
+            <input type="hidden" name="source" value="direct-test-form.html">
+            <input type="hidden" name="form_id" value="directTestForm">
+            <input type="hidden" name="form_type" value="visa">
+            <input type="hidden" name="timestamp" value="">
+            <input type="hidden" name="submission_id" value="">
+            
+            <button type="submit" id="submitDirect">Submit Direct Form</button>
+        </form>
+        
+        <div class="result" id="directResult">
+            <p>Result will appear here...</p>
+            <iframe name="resultFrame" id="resultFrame" style="width:100%; height:150px; border:1px solid #cbd5e0;"></iframe>
+        </div>
+    </div>
+
+    <div class="test-form">
+        <h2>Fetch API Test</h2>
+        <form id="fetchTestForm">
+            <label for="fetchName">Name:</label>
+            <input type="text" id="fetchName" name="name" value="Test User" required>
+            
+            <label for="fetchEmail">Email:</label>
+            <input type="email" id="fetchEmail" name="email" value="test@example.com" required>
+            
+            <label for="fetchPhone">Phone:</label>
+            <input type="text" id="fetchPhone" name="phone" value="+27123456789" required>
+            
+            <label for="fetchMessage">Message:</label>
+            <textarea id="fetchMessage" name="message" required>Fetch API submission test</textarea>
+            
+            <label for="fetchVisaType">Visa Type:</label>
+            <select id="fetchVisaType" name="visaType" required>
+                <option value="tourist">Tourist</option>
+                <option value="business">Business</option>
+                <option value="work" selected>Work</option>
+                <option value="study">Study</option>
+            </select>
+            
+            <label for="contentType">Content Type:</label>
+            <select id="contentType">
+                <option value="json">application/json</option>
+                <option value="formData" selected>application/x-www-form-urlencoded</option>
+                <option value="multipart">multipart/form-data</option>
+            </select>
+            
+            <button type="button" id="submitFetch">Submit with Fetch API</button>
+        </form>
+        
+        <div class="result" id="fetchResult">
+            <p>Result will appear here...</p>
+        </div>
+    </div>
+
+    <div class="test-form">
+        <h2>Admin Dashboard Query</h2>
+        <p>This will attempt to retrieve your form submissions from the server.</p>
+        <button type="button" id="checkSubmissions">Check Recent Submissions</button>
+        <div class="result" id="submissionsResult">
+            <p>Results will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        // Set timestamp and submission ID on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const timestamp = now.toISOString();
+            const submissionId = 'test_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+            
+            document.querySelector('input[name="timestamp"]').value = timestamp;
+            document.querySelector('input[name="submission_id"]').value = submissionId;
+            
+            // Set up event listeners
+            document.getElementById('directTestForm').addEventListener('submit', handleDirectFormSubmit);
+            document.getElementById('submitFetch').addEventListener('click', handleFetchSubmit);
+            document.getElementById('checkSubmissions').addEventListener('click', checkSubmissions);
+        });
+        
+        // Handle direct form submission
+        function handleDirectFormSubmit(event) {
+            const resultDiv = document.getElementById('directResult');
+            resultDiv.innerHTML = '<p>Form submitted directly! Check the iframe response below and your admin dashboard.</p>';
+            resultDiv.innerHTML += '<iframe name="resultFrame" id="resultFrame" style="width:100%; height:150px; border:1px solid #cbd5e0;"></iframe>';
+            
+            // Log the submission details
+            console.log('Direct form submission:');
+            const formData = new FormData(event.target);
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+        }
+        
+        // Handle fetch API submission
+        function handleFetchSubmit() {
+            const resultDiv = document.getElementById('fetchResult');
+            resultDiv.innerHTML = '<p>Submitting with Fetch API...</p>';
+            
+            const form = document.getElementById('fetchTestForm');
+            const contentType = document.getElementById('contentType').value;
+            
+            // Build form data
+            const formData = {
+                name: document.getElementById('fetchName').value,
+                email: document.getElementById('fetchEmail').value,
+                phone: document.getElementById('fetchPhone').value,
+                message: document.getElementById('fetchMessage').value,
+                visaType: document.getElementById('fetchVisaType').value,
+                subject: 'Fetch API Test Form',
+                source: 'direct-test-form.html - fetchTestForm',
+                form_id: 'fetchTestForm',
+                form_type: 'visa',
+                timestamp: new Date().toISOString(),
+                submission_id: 'fetch_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9)
+            };
+            
+            let fetchOptions = {
+                method: 'POST'
+            };
+            
+            // Set content type and body based on selected format
+            if (contentType === 'json') {
+                fetchOptions.headers = {
+                    'Content-Type': 'application/json'
+                };
+                fetchOptions.body = JSON.stringify(formData);
+            } else if (contentType === 'formData') {
+                const params = new URLSearchParams();
+                Object.keys(formData).forEach(key => {
+                    params.append(key, formData[key]);
+                });
+                
+                fetchOptions.headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                };
+                fetchOptions.body = params;
+            } else if (contentType === 'multipart') {
+                const multipartFormData = new FormData();
+                Object.keys(formData).forEach(key => {
+                    multipartFormData.append(key, formData[key]);
+                });
+                
+                // No Content-Type header for multipart/form-data
+                fetchOptions.body = multipartFormData;
+            }
+            
+            // Make the fetch request
+            fetch('https://visa-vq00.onrender.com/api/visa', fetchOptions)
+                .then(response => {
+                    const status = response.status;
+                    const statusText = response.statusText;
+                    
+                    resultDiv.innerHTML += `<p>Response status: ${status} ${statusText}</p>`;
+                    
+                    if (response.ok) {
+                        resultDiv.classList.add('success');
+                        resultDiv.classList.remove('error');
+                    } else {
+                        resultDiv.classList.add('error');
+                        resultDiv.classList.remove('success');
+                    }
+                    
+                    return response.text().catch(() => 'No response body');
+                })
+                .then(data => {
+                    resultDiv.innerHTML += `<p>Response data:</p><pre>${data}</pre>`;
+                    console.log('Fetch submission response:', data);
+                })
+                .catch(error => {
+                    resultDiv.innerHTML += `<p class="error">Error: ${error.message}</p>`;
+                    console.error('Fetch error:', error);
+                });
+        }
+        
+        // Check for recent submissions
+        function checkSubmissions() {
+            const resultDiv = document.getElementById('submissionsResult');
+            resultDiv.innerHTML = '<p>Checking for recent submissions...</p>';
+            
+            // Try to fetch recent submissions (this may not work due to CORS or API limitations)
+            fetch('https://visa-vq00.onrender.com/api/submissions')
+                .then(response => {
+                    resultDiv.innerHTML += `<p>Response status: ${response.status} ${response.statusText}</p>`;
+                    return response.text().catch(() => 'No response body');
+                })
+                .then(data => {
+                    resultDiv.innerHTML += `<p>Response data:</p><pre>${data}</pre>`;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML += `<p class="error">Error: ${error.message}</p>`;
+                    resultDiv.innerHTML += `
+                        <p>If you're seeing CORS errors, this is expected. You may need to:</p>
+                        <ul>
+                            <li>Check with your backend developer about API access</li>
+                            <li>Make sure your admin dashboard is properly connected to the database</li>
+                            <li>Verify the API endpoints are correctly configured</li>
+                        </ul>
+                    `;
+                });
+        }
+    </script>
+</body>
+</html>

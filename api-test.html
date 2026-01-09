@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .results {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            min-height: 100px;
+        }
+        
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        select, input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Testing Tool</h1>
+        <p>Use this tool to test the API endpoints for your Amahle VisaPro Solutions website.</p>
+        
+        <div class="test-section">
+            <h2>1. Discover Available Endpoints</h2>
+            <p>Click the button below to test which API endpoints are available on your server.</p>
+            <button id="discoverEndpoints">Discover Endpoints</button>
+            <div id="endpointResults" class="results">
+                <p>Results will appear here...</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. Test Form Submission</h2>
+            <p>Select an endpoint and send test data to verify form submissions.</p>
+            
+            <label for="endpointSelect">Select Endpoint:</label>
+            <select id="endpointSelect">
+                <option value="">Select an endpoint</option>
+                <option value="/api">Base API (/api)</option>
+                <option value="/api/visa-submissions">Visa Submissions (/api/visa-submissions)</option>
+                <option value="/api/submissions">Submissions (/api/submissions)</option>
+                <option value="/api/contact">Contact (/api/contact)</option>
+                <option value="/api/consult">Consult (/api/consult)</option>
+                <option value="/api/consultation">Consultation (/api/consultation)</option>
+                <!-- Add other endpoints here -->
+            </select>
+            
+            <div id="formFields">
+                <label for="testName">Name:</label>
+                <input type="text" id="testName" value="Test User">
+                
+                <label for="testEmail">Email:</label>
+                <input type="email" id="testEmail" value="test@example.com">
+                
+                <label for="testPhone">Phone:</label>
+                <input type="text" id="testPhone" value="+27123456789">
+                
+                <label for="testMessage">Message:</label>
+                <textarea id="testMessage" rows="3" style="width:100%">This is a test submission from the API Testing Tool.</textarea>
+            </div>
+            
+            <button id="sendTestData">Send Test Data</button>
+            <div id="submissionResults" class="results">
+                <p>Submission results will appear here...</p>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="test-section">
+            <h2>API Health Check</h2>
+            <p>Verify if the API server is responding:</p>
+            <button id="checkServerHealth">Check API Server</button>
+            <div id="serverHealthResults" class="results">
+                <p>Results will appear here...</p>
+            </div>
+            
+            <h2>API Information</h2>
+            <p>Base URL: <code>https://visa-vq00.onrender.com</code></p>
+            
+            <h3>Common Endpoints:</h3>
+            <ul>
+                <li><code>/api</code> - API root</li>
+                <li><code>/api/visa-submissions</code> - For visa application forms</li>
+                <li><code>/api/submissions</code> - Alternative for visa submissions</li>
+                <li><code>/api/contact</code> - For contact forms</li>
+                <li><code>/api/consult</code> - For consultation forms</li>
+            </ul>
+            
+            <h3>Troubleshooting:</h3>
+            <ul>
+                <li>If direct HTTP requests fail but form submissions work, you likely have a CORS issue</li>
+                <li>If both approaches fail, your API server may be down or unreachable</li>
+                <li>If the API is working but submissions don't show in the dashboard, you may be using incorrect endpoints</li>
+            </ul>
+            
+            <p>Note: After testing, update your website's forms to use the correct endpoints that work with your backend.</p>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const API_BASE_URL = 'https://visa-vq00.onrender.com';
+            
+            // Test endpoints using JSONP approach (alternative to direct fetch)
+            $('#discoverEndpoints').click(function() {
+                const $results = $('#endpointResults');
+                $results.html('<p>Testing endpoints using alternative methods...</p>');
+                
+                const endpoints = [
+                    '/api',
+                    '/api/visa-submissions',
+                    '/api/submissions',
+                    '/api/contact',
+                    '/api/consult',
+                    '/api/consultation',
+                    '/api/visa',
+                    '/api/visa-application'
+                ];
+                
+                let resultsHTML = '<h4>Testing with direct POST requests:</h4>';
+                resultsHTML += '<p>These tests might fail due to CORS restrictions, but the endpoints may still exist.</p>';
+                
+                let completedTests = 0;
+                
+                // Test using a form POST submission to avoid CORS
+                for (const endpoint of endpoints) {
+                    // Create a test object with minimal data
+                    const testData = {
+                        name: "API Test",
+                        email: "test@example.com",
+                        message: "Testing endpoint existence"
+                    };
+                    
+                    // Use jQuery's AJAX with complete callback to detect any response
+                    $.ajax({
+                        url: API_BASE_URL + endpoint,
+                        type: 'POST',
+                        data: testData,
+                        complete: function(jqXHR) {
+                            const status = jqXHR.status;
+                            // If we get any response (even an error), the endpoint exists
+                            const exists = status !== 0;
+                            const statusClass = exists ? "background-color:#e8f5e9;color:#388e3c" : "background-color:#ffebee;color:#d32f2f";
+                            const statusIcon = exists ? "✅" : "❌";
+                            
+                            resultsHTML += `<p style="${statusClass};padding:5px;border-radius:3px">
+                                ${statusIcon} <strong>${endpoint}</strong> - 
+                                Status: ${status} 
+                                ${exists ? "(Endpoint exists but may require specific data)" : "(Endpoint unreachable)"}
+                            </p>`;
+                            
+                            completedTests++;
+                            if (completedTests === endpoints.length) {
+                                // When all tests complete, add the fallback test section
+                                resultsHTML += '<h4>Testing with indirect methods:</h4>';
+                                resultsHTML += `<p>Attempting alternative test for endpoints...</p>`;
+                                
+                                // Add fallback check using iframe method
+                                testWithIframe();
+                                
+                                $results.html(resultsHTML);
+                            }
+                        }
+                    });
+                }
+                
+                // Fallback test using iframes to check POST endpoints
+                function testWithIframe() {
+                    resultsHTML += `<p>Creating test submission forms for manual testing...</p>`;
+                    
+                    // For each endpoint, create a test form that the user can submit
+                    endpoints.forEach(endpoint => {
+                        const formId = 'testForm_' + endpoint.replace(/\//g, '_');
+                        
+                        // Create form HTML
+                        const formHtml = `
+                            <div style="margin:10px 0;padding:10px;border:1px solid #ddd;border-radius:5px">
+                                <form id="${formId}" action="${API_BASE_URL}${endpoint}" method="POST" target="_blank">
+                                    <input type="hidden" name="name" value="Manual Test User">
+                                    <input type="hidden" name="email" value="test@example.com">
+                                    <input type="hidden" name="phone" value="+1234567890">
+                                    <input type="hidden" name="message" value="Testing endpoint from manual submission">
+                                    <button type="submit" class="manual-test-btn" 
+                                            style="background:#1976D2;padding:5px 10px;color:white;border:none;border-radius:4px">
+                                        Test ${endpoint} manually
+                                    </button>
+                                </form>
+                                <div class="manual-result" style="margin-top:5px;font-size:13px"></div>
+                            </div>
+                        `;
+                        
+                        resultsHTML += formHtml;
+                    });
+                    
+                    // Update results
+                    $results.html(resultsHTML);
+                    
+                    // Attach event handlers to the manual test forms
+                    $('.manual-test-btn').parent('form').on('submit', function(e) {
+                        const $form = $(this);
+                        const endpoint = $form.attr('action').replace(API_BASE_URL, '');
+                        const $resultDiv = $form.next('.manual-result');
+                        
+                        $resultDiv.html(`<p>Submitted test to ${endpoint}. Check your admin dashboard to see if it was received.</p>`);
+                    });
+                }
+            });
+            
+            // Test form submission using reliable iframe method
+            $('#sendTestData').click(function() {
+                const $results = $('#submissionResults');
+                const endpoint = $('#endpointSelect').val();
+                
+                if (!endpoint) {
+                    $results.html('<p style="color:red;">Please select an endpoint</p>');
+                    return;
+                }
+                
+                $results.html('<p>Sending test data...</p>');
+                
+                // Create test form data
+                const testData = {
+                    name: $('#testName').val(),
+                    email: $('#testEmail').val(),
+                    phone: $('#testPhone').val(),
+                    message: $('#testMessage').val(),
+                    subject: 'API Test Submission',
+                    source: 'api-test-page',
+                    timestamp: new Date().toISOString(),
+                    submission_id: 'test_' + Date.now()
+                };
+                
+                // For logging
+                console.log('Sending test data to:', API_BASE_URL + endpoint);
+                console.log('Test data:', testData);
+                
+                // Create an actual HTML form for submission
+                const $formContainer = $('<div id="testFormContainer"></div>').appendTo('body');
+                
+                const formHtml = `
+                    <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center">
+                        <div style="background:white;padding:20px;border-radius:8px;max-width:600px;width:90%">
+                            <h3>API Test Form</h3>
+                            <p>This form will be submitted to: <strong>${API_BASE_URL}${endpoint}</strong></p>
+                            <form id="directTestForm" action="${API_BASE_URL}${endpoint}" method="POST" target="resultFrame">
+                                <div style="margin-bottom:10px">
+                                    <label style="display:block;margin-bottom:5px">Name:</label>
+                                    <input type="text" name="name" value="${testData.name}" style="width:100%;padding:8px">
+                                </div>
+                                <div style="margin-bottom:10px">
+                                    <label style="display:block;margin-bottom:5px">Email:</label>
+                                    <input type="email" name="email" value="${testData.email}" style="width:100%;padding:8px">
+                                </div>
+                                <div style="margin-bottom:10px">
+                                    <label style="display:block;margin-bottom:5px">Phone:</label>
+                                    <input type="text" name="phone" value="${testData.phone}" style="width:100%;padding:8px">
+                                </div>
+                                <div style="margin-bottom:10px">
+                                    <label style="display:block;margin-bottom:5px">Message:</label>
+                                    <textarea name="message" style="width:100%;padding:8px;height:100px">${testData.message}</textarea>
+                                </div>
+                                <div style="margin-bottom:10px">
+                                    <label style="display:block;margin-bottom:5px">Subject:</label>
+                                    <input type="text" name="subject" value="${testData.subject}" style="width:100%;padding:8px">
+                                </div>
+                                
+                                <!-- Add hidden fields for additional data -->
+                                <input type="hidden" name="source" value="${testData.source}">
+                                <input type="hidden" name="timestamp" value="${testData.timestamp}">
+                                <input type="hidden" name="submission_id" value="${testData.submission_id}">
+                                
+                                <div style="display:flex;justify-content:space-between;margin-top:20px">
+                                    <button type="submit" style="background:#4CAF50;color:white;border:none;padding:10px 15px;border-radius:4px;cursor:pointer">
+                                        Submit Test Form
+                                    </button>
+                                    <button type="button" id="cancelTest" style="background:#f44336;color:white;border:none;padding:10px 15px;border-radius:4px;cursor:pointer">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                            <div style="margin-top:20px;border-top:1px solid #eee;padding-top:20px">
+                                <h4>Results:</h4>
+                                <iframe name="resultFrame" id="resultFrame" style="width:100%;height:150px;border:1px solid #ddd;border-radius:4px"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                $formContainer.html(formHtml);
+                
+                // Add event listeners
+                $('#cancelTest').on('click', function() {
+                    $formContainer.remove();
+                    $results.html('<p>Test cancelled by user.</p>');
+                });
+                
+                $('#directTestForm').on('submit', function() {
+                    $results.html(`
+                        <p>Form submitted to ${API_BASE_URL}${endpoint}</p>
+                        <p>Check your admin dashboard to see if the submission was received.</p>
+                        <p><strong>Note:</strong> Form data was submitted directly, bypassing any CORS restrictions.</p>
+                        <p>If this works but your website forms don't, it confirms a CORS issue.</p>
+                    `);
+                    
+                    // Remove the form after 5 seconds
+                    setTimeout(() => {
+                        $formContainer.fadeOut(500, function() {
+                            $(this).remove();
+                        });
+                    }, 5000);
+                });
+            });
+            
+            // Fallback submission method using iframe
+            function submitWithIframe(endpoint, formData) {
+                const iframeId = 'test_frame_' + Date.now();
+                const $iframe = $('<iframe>', {
+                    name: iframeId,
+                    id: iframeId,
+                    style: 'display:none'
+                }).appendTo('body');
+                
+                const $form = $('<form>', {
+                    action: API_BASE_URL + endpoint,
+                    method: 'POST',
+                    target: iframeId,
+                    style: 'display:none'
+                }).appendTo('body');
+                
+                // Add form fields
+                Object.entries(formData).forEach(([key, value]) => {
+                    $('<input>', {
+                        type: 'hidden',
+                        name: key,
+                        value: value
+                    }).appendTo($form);
+                });
+                
+                // Handle response
+                $iframe.on('load', function() {
+                    $('#submissionResults').append('<p>Iframe submission completed</p>');
+                    setTimeout(() => {
+                        $iframe.remove();
+                        $form.remove();
+                    }, 1000);
+                });
+                
+                // Submit the form
+                $form.submit();
+            }
+            
+            // Check API server health
+            $('#checkServerHealth').on('click', function() {
+                const $results = $('#serverHealthResults');
+                $results.html('<p>Checking API server health...</p>');
+                
+                // Create an image element with a random parameter to avoid caching
+                const timestamp = new Date().getTime();
+                const img = new Image();
+                let serverReachable = false;
+                
+                img.onload = function() {
+                    serverReachable = true;
+                    checkApiWithJsonp();
+                };
+                
+                img.onerror = function() {
+                    // Even on error, if we got a response, the server is reachable
+                    serverReachable = true;
+                    checkApiWithJsonp();
+                };
+                
+                // Set source to trigger request to the server
+                img.src = API_BASE_URL + '/favicon.ico?_=' + timestamp;
+                
+                // Set a timeout in case the server doesn't respond
+                setTimeout(function() {
+                    if (!serverReachable) {
+                        $results.html(`
+                            <p style="color:red">❌ API server not responding</p>
+                            <p>The API server at ${API_BASE_URL} is not responding to requests.</p>
+                            <p>Possible reasons:</p>
+                            <ul>
+                                <li>The server is down or experiencing issues</li>
+                                <li>The domain name is incorrect</li>
+                                <li>Network connectivity problems</li>
+                            </ul>
+                            <p>Contact your backend developer to check the server status.</p>
+                        `);
+                    }
+                }, 5000);
+                
+                // Function to check API with another method
+                function checkApiWithJsonp() {
+                    // If we got here, the server is reachable
+                    $results.html(`
+                        <p style="color:green">✅ API server is reachable</p>
+                        <p>Successfully connected to ${API_BASE_URL}</p>
+                    `);
+                    
+                    // Try a simple GET request to check API functionality
+                    $.ajax({
+                        url: API_BASE_URL,
+                        method: 'GET',
+                        dataType: 'text',
+                        timeout: 5000,
+                        success: function(data) {
+                            $results.append(`
+                                <p style="color:green">✅ API root endpoint responded</p>
+                                <p>Response: ${data}</p>
+                            `);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status > 0) {
+                                $results.append(`
+                                    <p style="color:orange">⚠️ API root endpoint returned status: ${jqXHR.status}</p>
+                                    <p>The server is online but might have issues with its API endpoints.</p>
+                                `);
+                            } else {
+                                $results.append(`
+                                    <p style="color:orange">⚠️ API root endpoint didn't respond correctly</p>
+                                    <p>This might be due to CORS restrictions or the endpoint not existing.</p>
+                                `);
+                            }
+                        }
+                    });
+                    
+                    // Create a direct form to test POST requests
+                    const formHtml = `
+                        <div style="margin-top:15px;padding-top:15px;border-top:1px solid #ddd;">
+                            <h4>Test Direct POST Request</h4>
+                            <p>Click the button below to test a direct form submission:</p>
+                            <form id="healthCheckForm" action="${API_BASE_URL}/api/ping" method="POST" target="healthCheckFrame">
+                                <input type="hidden" name="test" value="health_check">
+                                <button type="submit" style="background:#1976D2;color:white;border:none;padding:8px 15px;border-radius:4px;cursor:pointer">
+                                    Send Test POST Request
+                                </button>
+                            </form>
+                            <iframe name="healthCheckFrame" id="healthCheckFrame" style="width:100%;height:100px;border:1px solid #ddd;margin-top:10px;display:none"></iframe>
+                        </div>
+                    `;
+                    
+                    $results.append(formHtml);
+                    
+                    $('#healthCheckForm').on('submit', function() {
+                        $('#healthCheckFrame').show();
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

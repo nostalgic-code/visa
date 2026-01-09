@@ -1,0 +1,2047 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Amahle VisaPro Solutions — Professional Visa Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+  /* Removed rule that hid .top-contact-bar on mobile */
+  /* Remove all mobile-specific WhatsApp icon overrides to unify style */
+    .top-contact-bar {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      padding: 7px 0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 1200;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      flex-wrap: wrap;
+    }
+    header.site-head {
+      margin-top: 44px;
+    }
+    @media (max-width: 640px) {
+      .top-contact-bar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1200;
+        height: 38px !important;
+        min-height: 0 !important;
+        padding: 5px 0 !important;
+        font-size: 13px !important;
+      }
+      header.site-head {
+        margin-top: 38px !important;
+      }
+  /* Remove WhatsApp icon overrides for mobile */
+      .top-contact-bar span {
+        font-size: 13px !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .top-contact-bar {
+        font-size: 13px;
+        padding: 5px 0;
+      }
+      header.site-head {
+        margin-top: 32px;
+      }
+    }
+    .top-contact-bar {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      padding: 7px 0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 1200;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    body {
+      /* Remove top margin, handled by header and bar stacking */
+      margin-top: 0;
+    }
+    @media (max-width: 640px) {
+      .top-contact-bar {
+        font-size: 13px;
+        padding: 5px 0;
+      }
+      body {
+        margin-top: 54px;
+      }
+    }
+    .country-list-modern {
+      display: inline;
+    }
+    .country-list-modern span {
+      display: inline-block;
+      background: rgba(232,148,56,0.10);
+      color: var(--accent-2);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 2px 8px;
+      margin: 2px 2px 2px 0;
+      font-size: 1em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .country-list-modern span:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    :root{
+      --bg-1: #faf3e5; /* warm beige */
+      --bg-2: #ffffff;
+      --primary: #55888b; /* teal */
+      --accent: #e89438; /* orange */
+      --accent-2: #de5738; /* orange-red */
+      --text: #4b453f; /* warm gray */
+      --muted: #776f68; /* muted warm gray */
+      --card: #ffffff;
+      --shadow: 0 12px 30px rgba(75,69,63,0.08);
+      --radius: 18px;
+      --container: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color: var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    .wrap{width:92%;max-width:var(--container);margin:0 auto}
+    main.wrap{padding-top: 100px} /* Add padding for fixed header */
+
+    /* Header */
+    header.site-head{
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.site-head.scrolled {
+      background-color: rgba(250, 243, 229, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .logo-ico {
+      width: 60px;
+      height: 60px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--accent-2);
+      line-height: 1;
+    }
+    .brand-title .subtitle {
+      display: block;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    nav.site-nav{display:flex;gap:18px;align-items:center;flex:1;justify-content:center}
+    nav.site-nav .nav-links{display:flex;gap:18px;align-items:center}
+    nav.site-nav a{
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      position: relative;
+      padding: 6px 4px;
+      transition: all 0.3s ease;
+    }
+    nav.site-nav a:not(.btn-ghost):after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav.site-nav a:not(.btn-ghost):hover {
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+    nav.site-nav a:not(.btn-ghost):hover:after {
+      width: 100%;
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid var(--primary);
+      color:var(--primary);
+      padding:10px 14px;
+      border-radius:10px;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost:hover {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(85, 136, 139, 0.2);
+    }
+    .btn-primary{
+      background: linear-gradient(to right, var(--primary), color-mix(in srgb, var(--primary) 70%, var(--accent)));
+      color:#fff;
+      padding:10px 16px;
+      border-radius:12px;
+      border:none;
+      font-weight:700;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(to right, color-mix(in srgb, var(--primary) 90%, var(--accent)), var(--primary));
+    }
+
+    /* Hero */
+    .hero{display:flex;gap:48px;align-items:center;padding:36px 0 18px}
+    .hero-left{flex:1;max-width:640px}
+    .eyebrow{display:inline-block;background:rgba(107,44,214,0.08);color:var(--primary);padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:18px}
+    .hero-left h1{font-size:44px;line-height:1.02;margin:0 0 18px;color:#e89438}
+    .hero-left p{color:var(--muted);margin:0 0 24px}
+    .hero-ctas{display:flex;gap:14px}
+
+    .hero-right{width:520px;flex-shrink:0;position:relative}
+    .hero-art{width:100%;height:400px;border-radius:26px;background-image:url('compass2.jpg');background-size:cover;background-position:center;box-shadow:var(--shadow);overflow:hidden}
+
+    /* overlay form */
+    .apply-card{
+      position:absolute;
+      right:18px;
+      top:80%;
+      transform:translateY(-20%);
+      background:var(--card);
+      padding:24px;
+      border-radius:14px;
+      box-shadow:0 20px 40px rgba(15,23,36,0.12);
+      width:300px;
+      z-index:10;
+    }
+    .apply-card h4{
+      margin:0 0 16px;
+      font-size:16px;
+      color:#0f1724;
+      font-weight:600;
+    }
+    .apply-card input {
+      width:100%;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #eee;
+      margin:8px 0;
+      font-size:14px;
+      transition: border-color 0.3s ease;
+    }
+    .apply-card input:focus {
+      outline:none;
+      border-color:var(--primary);
+    }
+    .apply-card select {
+      width: 100%;
+      padding: 12px 35px 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 8px 0;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h10L5 6z' fill='%23999'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .apply-card select:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+    .apply-card select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(107, 44, 214, 0.1);
+      background-color: #ffffff;
+    }
+    .apply-card select option {
+      padding: 12px;
+      font-size: 14px;
+      background-color: #ffffff;
+      color: #333;
+    }
+    @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+      .apply-card select {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+    }
+    .apply-card button{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      background:linear-gradient(90deg,var(--primary),var(--accent));
+      color:#fff;
+      font-weight:700;
+      margin-top:8px;
+      cursor:pointer;
+      transition:transform 0.3s ease;
+    }
+    .apply-card button:hover{
+      transform:translateY(-2px);
+    }
+
+    /* About section */
+    .about{
+      display:flex;
+      gap:60px;
+      align-items:center;
+      padding:120px 0;
+      margin-top: 200px;
+      background:linear-gradient(180deg, var(--bg-2), var(--bg-1));
+      position:relative;
+      z-index:1;
+    }
+    .about .about-media{flex-basis:46%;position:relative}
+    .about .about-media img{
+      width:100%;
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      height:460px;
+      object-fit:cover;
+      object-position:center
+    }
+    .about .about-text{flex:1;max-width:540px}
+    .about .kicker{
+      color:var(--primary);
+      font-weight:700;
+      margin-bottom:12px;
+      font-size:15px;
+      letter-spacing:0.5px
+    }
+    .about h2{
+      font-size:32px;
+      margin:0 0 20px;
+      line-height:1.2;
+      color:#e89438
+    }
+    .about p{color:var(--muted);margin:0 0 24px;line-height:1.6}
+    .rating{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top:32px;
+      padding:16px;
+      background:rgba(107,44,214,0.04);
+      border-radius:14px
+    }
+    .rating .stars{color:#f59e0b;font-weight:700;font-size:18px}
+
+    /* Services Bento Grid */
+    .services{
+      padding:120px 0;
+      margin-top: 60px;
+      background:linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      position:relative;
+      z-index:1;
+    }
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:24px;
+      margin-top:40px
+    }
+    .service-card{
+      background:var(--card);
+      padding:32px;
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      transition:all 0.3s ease;
+      opacity:0;
+      transform:translateY(20px);
+      position:relative;
+      overflow:hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 20px 40px rgba(18,18,18,0.12)
+    }
+    .service-card.featured,
+    .service-card.wide{
+      background: linear-gradient(165deg, var(--primary), color-mix(in srgb, var(--primary) 70%, var(--accent)))
+    }
+    .service-card.featured h4,
+    .service-card.featured p,
+    .service-card.wide h4,
+    .service-card.wide p{
+      color:#fff
+    }
+    .service-card .icon{
+      width:48px;
+      height:48px;
+      background:rgba(85,136,139,0.1);
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:20px;
+      font-size:24px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .service-card.featured .icon{
+      background:rgba(255,255,255,0.2)
+    }
+    .service-card h4{
+      margin:0 0 12px;
+      font-size:20px;
+      line-height:1.3;
+      color:#e89438
+    }
+    .service-card p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      margin:0;
+      flex-grow: 1;
+    }
+    @media (max-width:980px){
+      .services-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:20px
+      }
+    }
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        justify-items: center;
+      }
+      .service-card,
+      .service-card.featured,
+      .service-card.wide {
+        width: 95vw !important;
+        max-width: 420px;
+      }
+    }
+
+    /* Why choose us section */
+    .why-section{
+      padding:100px 0;
+      background:linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      position:relative;
+      z-index:1;
+      margin-top: 100px;
+      margin-bottom: 80px;
+    }
+    .why-choose{
+      display:flex;
+      gap:60px;
+      align-items:center;
+      position:relative
+    }
+    .why-choose .content{
+      flex:1;
+      max-width:540px
+    }
+    .why-choose .media{
+      flex-basis:46%;
+      position:relative;
+      border-radius:24px;
+      overflow:hidden
+    }
+    .why-choose .media img{
+      width:100%;
+      height:460px;
+      object-fit:cover;
+      border-radius:24px;
+      box-shadow:var(--shadow)
+    }
+    .why-choose h4{
+      color:var(--primary);
+      font-weight:700;
+      margin:0 0 12px;
+      font-size:15px;
+      letter-spacing:0.5px
+    }
+    .why-choose h2{
+      font-size:36px;
+      margin:0 0 32px;
+      line-height:1.2;
+      color:#e89438
+    }
+    .why-list{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-bottom:32px
+    }
+    .why-list .item{
+      background:var(--card);
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(15,23,36,0.06);
+      transition:transform 0.3s ease
+    }
+    .why-list .item:hover{
+      transform:translateY(-4px)
+    }
+
+    /* Work process section */
+    .process-section{
+      display:flex;
+      gap:60px;
+      align-items:center;
+      padding:120px 0;
+      background:linear-gradient(180deg, var(--bg-2), var(--bg-1));
+      position:relative;
+      z-index:2;
+      margin-top:-60px
+    }
+    .process-section .media{
+      flex-basis:46%;
+      position:relative
+    }
+    .process-section .media img{
+      width:100%;
+      height:480px;
+      object-fit:cover;
+      border-radius:24px;
+      box-shadow:var(--shadow)
+    }
+    .process-section .content{flex:1;max-width:540px}
+    .process-section h4{
+      color:var(--primary);
+      font-weight:700;
+      margin:0 0 12px;
+      font-size:15px;
+      letter-spacing:0.5px
+    }
+    .process-section h2{
+      font-size:36px;
+      margin:0 0 32px;
+      line-height:1.2;
+      color:#e89438
+    }
+    .process-cards{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-bottom:32px
+    }
+    .step{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+      background:var(--card);
+      padding:24px;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(15,23,36,0.06);
+      transition:transform 0.3s ease
+    }
+    .step:hover{
+      transform:translateY(-4px)
+    }
+    .step .num{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--primary),var(--accent));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      flex-shrink:0
+    }
+    .step .text h4{
+      margin:0 0 8px;
+      color:#0f1724
+    }
+    .step .text p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5
+    }
+
+    /* Team section */
+    .team-section {
+      padding: 120px 0;
+      margin-top: 80px;
+      background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .team-content {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .team-section h4 {
+      color: var(--primary);
+      font-weight: 700;
+      margin: 0 0 12px;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+    .team-section h2 {
+      font-size: 36px;
+      margin: 0 0 24px;
+      line-height: 1.2;
+      color: #e89438;
+    }
+    .team-section p {
+      margin: 0 0 40px;
+      line-height: 1.6;
+    }
+    .team-cta {
+      padding: 16px 32px;
+      font-size: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(107,44,214,0.15);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 100px 0;
+      background: var(--bg-2);
+    }
+    .faq-section h2 {
+      text-align: center;
+      font-size: 42px;
+      color: var(--accent);
+      margin: 0 0 20px;
+    }
+    .faq-section .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 60px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--card);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .faq-item:hover {
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 24px 32px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .faq-question:hover {
+      background: rgba(85,136,139,0.05);
+    }
+    .faq-question::after {
+      content: '+';
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .faq-question.active::after {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 0 32px;
+    }
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 0 32px 24px 32px;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: 120px 0;
+      margin-top: 60px;
+      background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+      position: relative;
+      z-index: 1;
+    }
+    .testimonials-section h2 {
+      text-align: center;
+      font-size: 36px;
+      .top-contact-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 48px;
+        background: #fff;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      }
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      header.site-head {
+        margin-top: 48px;
+        z-index: 1000;
+        width: 100%;
+      }
+    }
+    .testimonial:hover {
+      transform: translateY(-5px);
+    }
+    .testimonial p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0 0 20px;
+    }
+    .testimonial strong {
+      color: var(--primary);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 120px 0;
+      margin-top: 80px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50l20-20l20 20l-20 20z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+      opacity: 0.1;
+      animation: movePattern 30s linear infinite;
+      z-index: -1;
+    }
+    @keyframes movePattern {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    .cta-content {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .cta-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .cta-section h2 {
+      font-size: 48px;
+      line-height: 1.2;
+      margin: 0 0 24px;
+    }
+    .cta-section p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin: 0 0 40px;
+      line-height: 1.6;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    .cta-buttons .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 14px 32px;
+      font-size: 16px;
+    }
+    .cta-buttons .btn-primary {
+      background: #fff;
+      color: var(--primary);
+      padding: 14px 32px;
+      font-size: 16px;
+    }
+    .cta-buttons .btn-ghost:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .cta-buttons .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 80px 0 32px;
+      background: var(--bg-1);
+    }
+    .footer-content {
+      display: flex;
+      gap: 80px;
+      margin-bottom: 48px;
+    }
+    .footer-brand {
+      flex: 1;
+      max-width: 280px;
+    }
+    .footer-brand .logo {
+      margin-bottom: 16px;
+    }
+    .footer-brand .logo-ico {
+      width: 50px;
+      height: 50px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 60px;
+    }
+    .footer-col {
+      min-width: 140px;
+    }
+    .footer-col h4 {
+      font-size: 16px;
+      margin: 0 0 16px;
+      color: var(--accent);
+    }
+    .footer-col a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .social-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(107,44,214,0.1);
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    .social-link svg {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .social-link:hover {
+      transform: translateY(-2px);
+      background: var(--primary);
+      color: white;
+    }
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(15,23,36,0.08);
+      text-align: center;
+    }
+
+    /* Footer Responsive Styles */
+    @media (max-width: 980px) {
+      .footer {
+        padding: 60px 0 32px;
+      }
+      .footer-content {
+        gap: 40px;
+      }
+      .footer-links {
+        gap: 30px;
+      }
+      .footer-brand {
+        max-width: 240px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-contact-bar {
+        font-size: 13px;
+        padding: 5px 0;
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+        background: transparent;
+      }
+      .top-contact-bar a {
+        justify-content: center;
+        width: 100%;
+        padding: 8px 0;
+        font-size: 15px;
+      }
+      header.site-head {
+        margin-top: 44px !important;
+      }
+    }
+      .footer-brand .logo {
+        justify-content: center;
+      }
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px 60px;
+      }
+      .footer-col {
+        min-width: 160px;
+        text-align: center;
+      }
+      .social-links {
+        justify-content: center;
+      }
+  
+
+    @media (max-width: 480px) {
+      .footer {
+        padding: 40px 0 24px;
+      }
+      .footer-content {
+        gap: 32px;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .footer-col {
+        min-width: 100%;
+      }
+      .footer-col h4 {
+        font-size: 18px;
+      }
+      .footer-col a {
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      header.site-head {
+        justify-content: space-between;
+      }
+      .site-nav {
+        order: 2;
+        margin-left: auto;
+      }
+      .mobile-only {
+        display: block;
+      }
+      .nav-links .btn-primary {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+      }
+    }
+
+    .hamburger {
+      display: block;
+      position: relative;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      margin: 10px 0;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      left: 0;
+    }
+
+    .hamburger::before {
+      top: -8px;
+    }
+
+    .hamburger::after {
+      bottom: -8px;
+    }
+
+    .mobile-menu-toggle.active .hamburger {
+      background: transparent;
+    }
+
+    .mobile-menu-toggle.active .hamburger::before {
+      transform: rotate(45deg);
+      top: 0;
+      background: var(--accent-2);
+    }
+
+    .mobile-menu-toggle.active .hamburger::after {
+      transform: rotate(-45deg);
+      bottom: 0;
+      background: var(--accent-2);
+    }
+
+    /* Add active state styles for better visibility */
+    .mobile-menu-toggle {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      background-color: rgba(232, 148, 56, 0.1);
+    }
+
+    .mobile-menu-toggle.active {
+      background-color: rgba(232, 148, 56, 0.15);
+    }
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{flex-direction:column-reverse}
+      .hero-right{width:100%}
+      .apply-card{position:static;transform:none;margin-top:-60px}
+      .about{flex-direction:column}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .why-choose{flex-direction:column-reverse}
+      .why-choose .media{width:100%;margin-bottom:40px}
+      .why-choose .content{max-width:100%}
+      .process-section{flex-direction:column}
+      .process-section .media{width:100%;margin-bottom:40px}
+      .process-section .content{max-width:100%}
+      .testimonials-grid{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px
+      }
+      .testimonials-section h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+      }
+      .testimonial {
+        padding: 24px;
+      }
+
+      /* Navigation changes for tablet */
+      header.site-head {
+        padding: 16px 0;
+      }
+      .logo-ico {
+        width: 50px;
+        height: 50px;
+      }
+      .brand-title {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width:768px){
+      /* Mobile navigation styles */
+      .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        margin-right: 0;
+      }
+
+      .desktop-only {
+        display: none;
+      }
+
+      .site-nav {
+        position: static;
+        margin-left: auto;
+      }
+
+      nav.site-nav .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 360px;
+        height: 100vh;
+        background: var(--bg-1);
+        padding: 80px 32px 32px;
+        flex-direction: column;
+        gap: 24px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        z-index: 1000;
+        justify-content: flex-start;
+      }
+
+      nav.site-nav .nav-links.active {
+        right: 0;
+      }
+
+      nav.site-nav .nav-links a {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+        font-size: 18px;
+        padding: 12px 0;
+      }
+
+      nav.site-nav .nav-links.active a {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      nav.site-nav .nav-links a:not(.btn-ghost):after {
+        display: none;
+      }
+
+      nav.site-nav .nav-links .btn-ghost {
+        margin-top: 20px;
+        text-align: center;
+        padding: 14px 20px;
+      }
+
+      header.site-head {
+        padding: 12px 20px;
+      }
+
+      .logo {
+        gap: 8px;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 18px;
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-links .btn-ghost {
+        width: 100%;
+        text-align: center;
+        margin-top: 16px;
+      }
+
+      /* Add overlay when menu is open */
+      .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+
+      .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    @media (max-width:560px){
+      .hero-left h1{font-size:28px}
+      .apply-card{padding:14px}
+      .service-card{padding:14px}
+      .testimonials-grid{
+        grid-template-columns: 1fr;
+      }
+      .testimonial {
+        padding: 20px;
+      }
+      .testimonials-section h2 {
+        font-size: 28px;
+        margin-bottom: 30px;
+      }
+      
+      /* Smaller devices adjustments */
+      header.site-head {
+        padding: 12px 0;
+      }
+      .logo-ico {
+        width: 40px;
+        height: 40px;
+      }
+      .brand-title {
+        font-size: 18px;
+      }
+      .brand-title .subtitle {
+        font-size: 12px;
+      }
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .modal-container {
+      background: var(--bg-1);
+      width: 100%;
+      max-width: 700px;
+      max-height: calc(100vh - 40px);
+      border-radius: 24px;
+      position: relative;
+      transform: translateY(30px);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      margin: auto;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.05);
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
+    }
+
+    .modal-content {
+      padding: 32px;
+      overflow-y: auto;
+      max-height: calc(100vh - 40px);
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 0 20px;
+    }
+
+    .modal-header h3 {
+      font-size: 28px;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+
+    .modal-subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .modal-form {
+      margin-top: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 0 auto;
+      max-width: 100%;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .modal-form label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .modal-form input,
+    .modal-form select,
+    .modal-form textarea {
+      padding: 12px 14px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      background: white;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .modal-form input:focus,
+    .modal-form select:focus,
+    .modal-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(232,148,56,0.1);
+    }
+
+    .modal-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-footer {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .submit-btn {
+      background: linear-gradient(to right, var(--accent), var(--accent-2));
+      color: white;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(232,148,56,0.2);
+    }
+
+    .form-note {
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Show modal */
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-overlay.show .modal-container {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .modal-overlay {
+        padding: 16px;
+        align-items: flex-start;
+      }
+      .modal-container {
+        margin: 0;
+        max-height: calc(100vh - 32px);
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .modal-content {
+        padding: 20px;
+      }
+      .modal-header h3 {
+        font-size: 24px;
+      }
+      .modal-subtitle {
+        font-size: 14px;
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 12px 24px;
+      }
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    @media (max-width: 640px) {
+      .services-grid {
+        justify-items: center;
+      }
+      .service-card {
+        width: 95vw !important;
+        max-width: 420px;
+      }
+    }
+    body, button, input, select, textarea {
+      font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  
+  <header class="site-head wrap" style="margin-top: 20px;">
+      <div class="logo">
+  <img src="Logo-removebg-preview.png" alt="Amahle VisaPro Solutions Logo" class="logo-ico" />
+        <div class="brand">
+          <div class="brand-title">
+            Amahle
+            <span class="subtitle">VisaPro Solutions</span>
+          </div>
+        </div>
+      </div>
+    <nav class="site-nav">
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="services.html">Services</a>
+        <a href="#why">Why</a>
+        <a href="#process">Process</a>
+        <a class="btn-ghost" href="contact.html">Contact</a>
+  <button class="btn-primary mobile-only" id="mobileConsultBtn">Consult Our Experts</button>
+      </div>
+    </nav>
+  <button type="button" class="btn-primary desktop-only" id="headerConsultBtn">Consult Our Experts</button>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <span class="eyebrow">Trusted Excellence</span>
+        <h1>Personal visa support — handled by experts.</h1>
+        <p class="muted">Amahle VisaPro Solutions is run by experienced visa consultants who personally review your documents, guide your decisions, and support you from start to finish.</p>
+        <div class="hero-ctas">
+          <button type="button" id="openAppModal" class="btn-primary">Request Call Back</button>
+          <button class="btn-ghost" id="heroConsultBtn">Book Consultation</button>
+  <!-- Request Call Back Modal -->
+  <div id="appModal" class="modal-overlay">
+    <div class="modal-container">
+      <button id="closeAppModal" class="modal-close">&times;</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Request Call Back</h3>
+          <p class="modal-subtitle">Share your details and we'll get back to you within 24 hours.</p>
+        </div>
+        <form id="modalApplyForm" class="modal-form" action="https://visa-vq00.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="appName">Full Name</label>
+              <input type="text" id="appName" name="name" required placeholder="Enter your full name" />
+            </div>
+            <div class="form-group">
+              <label for="appEmail">Email Address</label>
+              <input type="email" id="appEmail" name="email" required placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+              <label for="appPhone">Phone Number</label>
+              <input type="tel" id="appPhone" name="phone" required placeholder="Enter your phone number" />
+            </div>
+            <div class="form-group">
+              <label for="appCountryFrom">Country You Are Applying From</label>
+              <input type="text" id="appCountryFrom" name="countryApplyingFrom" required placeholder="Country you are applying from" />
+            </div>
+            <div class="form-group">
+              <label for="appPassportCountry">Country of Passport</label>
+              <input type="text" id="appPassportCountry" name="passportCountry" required placeholder="Your passport country" />
+            </div>
+            <div class="form-group">
+              <label for="appDestination">Destination</label>
+              <input type="text" id="appDestination" name="destination" required placeholder="Your destination" />
+            </div>
+            <div class="form-group full-width">
+              <label for="appReturnDate">Intended Return Date</label>
+              <input type="date" id="appReturnDate" name="returnDate" required />
+            </div>
+            <div class="form-group full-width">
+              <label for="appVisaType">Type of Service</label>
+              <select id="appVisaType" name="visaType" required>
+                <option value="" disabled selected>Select service type</option>
+                <option value="tourist">Tourist Visa Applications</option>
+                <option value="business">Business Visa Applications</option>
+                <option value="student">Student Visa Applications</option>
+                <option value="digital">Digital Nomad Visas</option>
+                <option value="consultation">One-on-One Consultations</option>
+                <option value="appeal">Visa Refusal Appeal Guidance</option>
+                <option value="document">Document Translation & Support Letters</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label for="appCommunication">Preferred Method of Communication</label>
+              <select id="appCommunication" name="communicationMethod" required>
+                <option value="" disabled selected>Select communication method</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone Call</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="sms">SMS</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="submit-btn">Request Call Back</button>
+            <p class="form-note">We'll contact you within 24 hours using your preferred method.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    <script>
+    // Request Call Back Modal logic
+    const openAppModal = document.getElementById('openAppModal');
+    const appModal = document.getElementById('appModal');
+    const closeAppModal = document.getElementById('closeAppModal');
+    if (openAppModal && appModal && closeAppModal) {
+      openAppModal.addEventListener('click', () => {
+        // Reset form and message when opening the modal
+        const form = document.getElementById('modalApplyForm');
+        if (form) {
+          form.reset();
+          const submitBtn = form.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Request Call Back';
+          }
+        }
+        appModal.classList.add('show');
+      });
+      
+      closeAppModal.addEventListener('click', () => appModal.classList.remove('show'));
+      appModal.addEventListener('click', (e) => { if (e.target === appModal) appModal.classList.remove('show'); });
+    }
+    </script>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-art" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="about-media">
+        <img src="consultation.jpg" alt="Consultation" />
+      </div>
+      <div class="about-text">
+        <div class="kicker">About Amahle VisaPro Solutions</div>
+        <h2>Professional Visa Consulting — Handled by Experts</h2>
+        <p class="muted">Amahle VisaPro Solutions is a consultant-led visa advisory firm providing personalized, hands-on support to individuals, families, students, and professionals.</p>
+        
+        <p class="muted">We are not an online self-service platform. Every visa application is managed by an experienced consultant who works directly with you — from eligibility assessment and document preparation to final submission guidance.</p>
+        
+        <p class="muted">We specialize in business, tourist, student, family, and work permit visas, ensuring each application is carefully reviewed, accurately prepared, and submitted with attention to detail. Our role is to reduce risk, prevent costly mistakes, and give you clarity throughout the process.</p>
+   
+        
+        
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- SERVICES -->
+    <section id="services" class="services wrap">
+      <h2>Our Visa Consulting Services</h2>
+      <div class="services-grid">
+        <div class="service-card featured">
+          <div class="icon">🌍</div>
+          <h4>Tourist Visa Applications</h4>
+          <p>Expert assistance with tourist visa applications for all major destinations. We handle the entire process to ensure a smooth and successful application.</p>
+          <ul class="features" style="margin: 20px 0 16px 0; padding: 0 0 0 18px; color: #fff; font-size: 1rem; line-height: 1.7;">
+            <li>✔️ Fast processing</li>
+            <li>✔️ All major destinations</li>
+            <li>✔️ Personalized support</li>
+          </ul>
+          <button class="btn-primary" style="margin-top: auto; background: #fff; color: #e89438; font-weight: bold; border-radius: 8px; padding: 10px 24px; border: none; cursor: pointer;">Apply Now</button>
+        </div>
+        <div class="service-card">
+          <div class="icon">🎓</div>
+          <h4>Student Visa Applications</h4>
+          <p>Comprehensive support for students pursuing education abroad, including application guidance and documentation.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">💼</div>
+          <h4>Business Visa Support</h4>
+          <p>For professionals and companies traveling for meetings, investments, or commercial activities.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">👥</div>
+          <h4>One-on-One Consultations</h4>
+          <p>Personalized visa consulting sessions to discuss your specific situation and develop the best strategy.</p>
+        </div>
+        <div class="service-card wide">
+          <div class="icon">⚖️</div>
+          <h4>Work Permit & Employment Visa Support</h4>
+          <p>For individuals who already have confirmed employment or an approved work authorization from an overseas employer.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="icon">📄</div>
+          <h4>Family & Dependent Visa Support</h4>
+          <p>For spouses, children, and family reunification applications.</p>
+        </div>
+        
+      </div>
+    </section>
+
+
+    <!-- WHY CHOOSE US -->
+    <section id="why" class="why-section">
+      <div class="why-choose wrap">
+        <div class="content">
+          <h4>Why Choose Us?</h4>
+          <h2>Your Trusted Partner for Visa Success</h2>
+          <div class="why-list">
+            <div class="item">
+              <strong>Fast & Reliable Service</strong>
+              <div class="small muted">We move quickly while maintaining accuracy, ensuring your visa process stays on track.</div>
+            </div>
+            <div class="item">
+              <strong>Step-by-step Guidance</strong>
+              <div class="small muted">From document preparation to embassy submission, we're with you at every step.</div>
+            </div>
+            <div class="item">
+              <strong>Expert-Led</strong>
+              <div class="small muted">Applications are handled by trained visa consultants, not software.</div>
+            </div>
+            <div class="item">
+              <strong>Hands-On Review</strong>
+              <div class="small muted">We check your documents before anything is submitted.</div>
+            </div>
+          </div>
+          <a class="btn-primary" href="#" id="whyConsultBtn">Talk to Your Dedicated Consultant</a>
+        </div>
+        <div class="media">
+          <img src="visa1.jpg" alt="Expert visa consultation" />
+        </div>
+      </div>
+    </section>
+
+
+    <!-- WORK PROCESS -->
+    <section id="process" class="process-section wrap">
+      <div class="media">
+        <img src="visa3.jpg" alt="Our streamlined process" />
+      </div>
+      <div class="content">
+        <h4>Our Work Process</h4>
+        <h2>How We Make Your Visa Journey Smooth</h2>
+        <div class="process-cards">
+          <div class="step">
+            <div class="num">01</div>
+            <div class="text">
+              <h4>Initial Consultation</h4>
+              <p>We discuss your goals, review your background, and identify required documents.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">02</div>
+            <div class="text">
+              <h4>Tailored Strategy</h4>
+              <p>We create a personalized application strategy and comprehensive checklist.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <div class="text">
+              <h4>Submission & Follow-up</h4>
+              <p>We handle the submission process and follow up until your visa is approved.</p>
+            </div>
+          </div>
+        </div>
+  <a class="btn-primary" href="#" id="processConsultBtn">Start Your Journey</a>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section wrap">
+      <h2>Frequently Asked Questions</h2>
+      <p class="subtitle">Get answers to common questions about visa applications and our services</p>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">Do I need a passport to get a visa?</button>
+          <div class="faq-answer">Yes, you need a valid passport to get a visa.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Do South Africans need a visa for all countries?</button>
+          <div class="faq-answer">No, South African citizens do not need a visa for all countries.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What is a Schengen visa?</button>
+          <div class="faq-answer">A Schengen visa is a short-stay visa allowing citizens from non-EU countries to travel freely within the 29 European countries for tourism, business or family visit.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What is the difference between a single and multiple entry?</button>
+          <div class="faq-answer">A single entry visa allows only one entry into a country, becoming void after you leave, while a multiple entry visa permits several entries and exits within its validity period.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Will my visa be guaranteed?</button>
+          <div class="faq-answer">No, a visa is never guaranteed, even after approval.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What is an eTA?</button>
+          <div class="faq-answer">Electronic Travel Authorization is an entry requirement for visa-exempt foreign nationals linked to a traveller's passport.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Can I apply for a visa from any country even if I am not a citizen of that country?</button>
+          <div class="faq-answer">Yes, you can but you are required to be a legal resident of that country (e.g., work permit, student long-term visa).</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Can I get an emergency visa?</button>
+          <div class="faq-answer">Yes, you can but there are specific rules for different countries.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Who processes visa applications?</button>
+          <div class="faq-answer">They are processed by the immigration authorities of the destination country, often through their embassies.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TEAM -->
+    <section id="team" class="team-section">
+      <div class="wrap team-content">
+        <h4>Our Expert Consultants</h4>
+        <h2>Discover the expert visa consultants who will guide you every step of the way</h2>
+        <p class="muted">Our team combines legal knowledge with practical embassy experience to ensure high success rates. With decades of combined experience in visa processing and immigration law, our consultants are ready to help you achieve your global mobility goals.</p>
+  <a class="btn-primary team-cta" href="#" id="teamConsultBtn">Talk to Your Dedicated Consultant</a>
+      </div>
+    </section>
+
+
+   
+
+    
+    <!-- CTA -->
+    <section id="cta" class="cta-section">
+      <div class="wrap">
+        <div class="cta-content">
+          <span class="cta-badge">Apply Now</span>
+          <h2>Ready to Start Your Global Journey?</h2>
+          <p>Join thousands of successful visa applicants. Get expert consultation and start your visa process today with our premium support package.</p>
+          <div class="cta-buttons">
+            <button class="btn-primary" id="openConsultModal">Talk to Your Dedicated Consultant</button>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Consultation Modal -->
+  <div class="modal-overlay" id="consultModal">
+    <div class="modal-container">
+      <button class="modal-close" aria-label="Close modal">×</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Schedule Your Consultation</h3>
+          <p class="modal-subtitle">Tell us about your visa needs, and we'll help you achieve your travel goals.</p>
+        </div>
+  <form id="consultForm" class="modal-form" action="https://visa-vq00.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="name" required placeholder="Enter your full name" />
+            </div>
+            <div class="form-group">
+              <label for="emailAddress">Email Address</label>
+              <input type="email" id="emailAddress" name="email" required placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number</label>
+              <input type="tel" id="phoneNumber" name="phone" required placeholder="Enter your phone number" />
+            </div>
+            <div class="form-group">
+              <label for="countryApplyingFrom">Country You Are Applying From</label>
+              <input type="text" id="countryApplyingFrom" name="countryApplyingFrom" required placeholder="Country you are applying from" />
+            </div>
+            <div class="form-group">
+              <label for="passportCountry">Country of Passport</label>
+              <input type="text" id="passportCountry" name="passportCountry" required placeholder="Your passport country" />
+            </div>
+            <div class="form-group">
+              <label for="destination">Destination</label>
+              <input type="text" id="destination" name="destination" required placeholder="Your destination" />
+            </div>
+            <div class="form-group full-width">
+              <label for="returnDate">Intended Return Date</label>
+              <input type="date" id="returnDate" name="returnDate" required />
+            </div>
+            <div class="form-group full-width">
+              <label for="visaType">Type of Visa</label>
+              <select id="visaType" name="visaType" required>
+                <option value="" disabled selected>Select visa type</option>
+                <option value="tourist">Tourist Visa</option>
+                <option value="business">Business Visa</option>
+                <option value="student">Student Visa</option>
+                <option value="work">Work Permit</option>
+                <option value="permanent">Permanent Residence</option>
+                <option value="digital">Digital Nomad Visa</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label for="communicationMethod">Preferred Method of Communication</label>
+              <select id="communicationMethod" name="communicationMethod" required>
+                <option value="" disabled selected>Select communication method</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone Call</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="sms">SMS</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label for="message">Additional Information</label>
+              <textarea id="message" name="message" rows="3" placeholder="Tell us more about your visa requirements or any specific questions you have."></textarea>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="submit-btn">Schedule Consultation</button>
+            <p class="form-note">We'll get back to you within 24 hours to confirm your consultation.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Elfsight WhatsApp Chat | Untitled WhatsApp Chat -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-87840661-af41-44ef-b85a-b40a1b7211c4" data-elfsight-app-lazy></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="Logo-removebg-preview.png" alt="Amahle VisaPro Solutions Logo" class="logo-ico" />
+            <div class="brand">
+              <div class="brand-title">
+                Amahle
+                <span class="subtitle">VisaPro Solutions</span>
+              </div>
+            </div>
+          </div>
+          <p class="small muted">Your trusted partner for professional visa consulting and global mobility solutions.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="services.html">Business Visa</a>
+            <a href="#services">Tourist Visa</a>
+            <a href="#services">Student Visa</a>
+            <a href="#services">Work Permit</a>
+            
+            
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#about">About Us</a>
+            <a href="#team">Our Team</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="disclaimer.html">Disclaimer</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <p class="small muted">info@visaproamahle.co.za</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin: 12px 0 0 0;">
+              
+              <a href="tel:+27797468567" class="phone-link">+27 79 746 8567</a>
+              <a href="tel:+27717434048" class="phone-link">+27 71 743 4048</a>
+              
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="small">© <span id="year"></span> Amahle VisaPro Solutions • All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script src="form-handler-v2.js"></script>
+  
+  <script>
+    // FAQ Accordion functionality
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const isActive = button.classList.contains('active');
+        
+        // Close all other accordions
+        document.querySelectorAll('.faq-question').forEach(btn => {
+          btn.classList.remove('active');
+          btn.nextElementSibling.classList.remove('active');
+        });
+        
+        // Toggle current accordion
+        if (!isActive) {
+          button.classList.add('active');
+          answer.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
