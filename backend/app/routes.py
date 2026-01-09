@@ -321,3 +321,39 @@ def view_application(app_id):
         
     except Exception as e:
         return f"Error loading application: {str(e)}", 404
+
+@api_bp.route('/applications/refresh', methods=['GET'])
+def refresh_applications():
+    """API endpoint to fetch fresh dashboard data for real-time updates"""
+    try:
+        # Check for access token
+        access_token = request.headers.get('Authorization', '').replace('Bearer ', '')
+        if not access_token:
+            return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+        
+        # Get authenticated client
+        auth_client = supabase.postgrest.auth(access_token)
+        
+        # Fetch all applications
+        result = auth_client.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
+        applications = result.data
+        
+        # Calculate stats
+        total = len(applications)
+        new = len([app for app in applications if app.get('status') == 'new'])
+        in_progress = len([app for app in applications if app.get('status') == 'in_progress'])
+        completed = len([app for app in applications if app.get('status') == 'completed'])
+        
+        return jsonify({
+            'success': True,
+            'applications': applications,
+            'stats': {
+                'total': total,
+                'new': new,
+                'in_progress': in_progress,
+                'completed': completed
+            }
+        }), 200
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
