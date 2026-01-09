@@ -11,9 +11,9 @@ $(document).ready(function() {
         'contactForm': '/contact'          // This one was already working
     };
 
-    // Base API URL - Change to localhost for local development
-    const API_BASE_URL = 'http://localhost:5000/api';
-    // const API_BASE_URL = 'https://visa-vq00.onrender.com/api'; // Use this when deployed to Render
+    // Base API URL - Production (use localhost for local development)
+    const API_BASE_URL = 'https://visa-backend-h11c.onrender.com/api';
+    // const API_BASE_URL = 'http://localhost:5000/api'; // For local development // Use this when deployed to Render
 
     // Reusable form submission handler
     function handleFormSubmit($form, endpoint) {
