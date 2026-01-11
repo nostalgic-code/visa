@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Privacy Policy — Amahle VisaPro Solutions</title>
+  <title>Why Choose Us - Amahle VisaPro Solutions</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
   <style>
     :root{
       --bg-1: #faf3e5;
@@ -20,19 +21,22 @@
       --radius: 18px;
       --container: 1180px;
     }
-    
+
+    * {box-sizing:border-box}
+    html,body {height:100%}
     body {
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
       color: var(--text);
-      line-height: 1.7;
-      padding: 0;
-      margin: 0;
-      font-size: 18px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      margin-top: 0;
     }
-    
+
     .wrap {width:92%;max-width:var(--container);margin:0 auto}
-    
+    main.wrap {padding-top: 120px; padding-bottom: 80px;}
+
     /* Header */
     header.site-head {
       padding: 22px 0;
@@ -48,7 +52,7 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
-    
+
     .logo {
       display: flex;
       align-items: center;
@@ -123,71 +127,77 @@
       border-radius:10px;
       transition: all 0.3s ease;
     }
-    
-    .btn-ghost:hover {
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      color: white;
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(85, 136, 139, 0.2);
+
+    /* Why Choose Us */
+    .why-section {
+      padding:80px 0;
+      background:linear-gradient(180deg, var(--bg-1), var(--bg-2));
     }
     
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 140px 20px 60px;
+    .why-choose {
+      display:flex;
+      gap:60px;
+      align-items:center;
     }
     
-    h1 {
-      font-size: 42px;
-      color: var(--accent);
-      margin: 0 0 10px;
-    }
-    .effective-date {
-      color: var(--muted);
-      margin-bottom: 40px;
-      font-size: 16px;
-    }
-    h2 {
-      font-size: 28px;
-      color: var(--primary);
-      margin: 40px 0 20px;
-    }
-    h3 {
-      font-size: 20px;
-      color: var(--text);
-      margin: 30px 0 15px;
-      font-weight: 600;
-    }
-    p {
-      margin: 0 0 20px;
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.8;
-    }
-    ul {
-      margin: 10px 0 20px 20px;
-      color: var(--text);
-    }
-    li {
-      margin-bottom: 12px;
-      font-size: 18px;
-      line-height: 1.8;
-    }
-    .contact-email {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .contact-email:hover {
-      color: var(--accent);
+    .why-choose .content {
+      flex:1;
+      max-width:540px
     }
     
+    .why-choose .media {
+      flex-basis:46%;
+      position:relative;
+      border-radius:24px;
+      overflow:hidden
+    }
+    
+    .why-choose .media img {
+      width:100%;
+      height:460px;
+      object-fit:cover;
+      border-radius:24px;
+      box-shadow:var(--shadow)
+    }
+    
+    .why-choose h4 {
+      color:var(--primary);
+      font-weight:700;
+      margin:0 0 12px;
+      font-size:40px;
+      letter-spacing:0.5px
+    }
+    
+    .why-choose h2 {
+      font-size:36px;
+      margin:0 0 32px;
+      line-height:1.2;
+      color:#e89438
+    }
+    
+    .why-list {
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-bottom:32px
+    }
+    
+    .why-list .item {
+      background:var(--card);
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(15,23,36,0.06);
+      transition:transform 0.3s ease
+    }
+    
+    .why-list .item:hover {
+      transform:translateY(-4px)
+    }
+
     /* Footer */
     .footer {
       padding: 80px 0 32px;
       background: var(--bg-1);
-      margin-top: 80px;
     }
     
     .footer-content {
@@ -225,10 +235,6 @@
       transition: color 0.3s ease;
     }
     
-    .footer-col a:hover {
-      color: var(--primary);
-    }
-    
     .social-links {
       display: flex;
       gap: 12px;
@@ -247,12 +253,6 @@
       transition: all 0.3s ease;
     }
     
-    .social-link:hover {
-      transform: translateY(-2px);
-      background: var(--primary);
-      color: white;
-    }
-    
     .footer-bottom {
       padding-top: 32px;
       border-top: 1px solid rgba(15,23,36,0.08);
@@ -261,9 +261,22 @@
     
     .small {font-size:13px}
     .muted {color:var(--muted)}
+
+    @media (max-width:980px) {
+      .why-choose {flex-direction:column-reverse}
+      .why-choose .media {width:100%;margin-bottom:40px}
+      .why-choose .content {max-width:100%}
+    }
+
+    @media (max-width: 640px) {
+      .why-choose h2 {
+        font-size: 28px;
+      }
+    }
   </style>
 </head>
 <body>
+  
   <header class="site-head wrap" style="margin-top: 20px;">
     <a href="index.html" style="text-decoration: none;">
       <div class="logo">
@@ -287,67 +300,38 @@
     </nav>
   </header>
 
-  <div class="container">
-    
-    <h1>Privacy Policy</h1>
-    <p class="effective-date">Effective Date: January 9, 2026</p>
-    
-    <p>This policy explains how we collect, use, store, disclose, and protect your personal data when you visit our website or use our services.</p>
-    
-    <h2>1. Information we collect</h2>
-    <p>We may collect the following categories of personal information when you interact with us:</p>
-    
-    <h3>Contact & identification:</h3>
-    <p>Name, email, phone, address, nationality, passport details.</p>
-    
-    <h3>Application data:</h3>
-    <p>Visa type, travel dates, purpose, supporting documents, and other related submission information.</p>
-    
-    <h3>Technical & usage data:</h3>
-    <p>IP address, device info, browsing pages, cookies, analytics data.</p>
-    
-    <h2>2. How we use your information</h2>
-    <p>We use your data to:</p>
-    <ul>
-      <li>Provide, manage, and improve our services.</li>
-      <li>Prepare and submit visa applications on your behalf.</li>
-      <li>Communicate updates about your application.</li>
-      <li>Respond to inquiries, feedback, and support requests.</li>
-      <li>Comply with legal and regulatory obligations.</li>
-    </ul>
-    
-    <h2>3. Sharing your information</h2>
-    <p>We may share your information:</p>
-    <ul>
-      <li>With visa authorities and third-party service providers (e.g., translation, courier per your request).</li>
-      <li>Where required by law, court order, or investigation.</li>
-      <li>With your consent.</li>
-    </ul>
-    <p>We do not sell or trade personal information to unrelated third parties.</p>
-    
-    <h2>4. Data protection & security</h2>
-    <p>We implement reasonable technical and organizational safeguards to protect personal data against unauthorized access or loss. However, no system is 100% secure — we cannot guarantee absolute protection.</p>
-    
-    <h2>5. Your rights</h2>
-    <p>You can:</p>
-    <ul>
-      <li>Request access to your personal data.</li>
-      <li>Request correction of inaccurate information.</li>
-      <li>Ask for deletion of data where legally permitted.</li>
-      <li>Withdraw consent where applicable.</li>
-    </ul>
-    <p>To exercise these rights, contact:<br>
-    📧 <a href="mailto:info@visaproamahle.co.za" class="contact-email">info@visaproamahle.co.za</a></p>
-    
-    <h2>6. Third-party links</h2>
-    <p>This policy does not apply to third-party websites linked from our site. Visiting those is at your own risk.</p>
-    
-    <h2>7. Children</h2>
-    <p>We do not knowingly collect personal data from children under 18. If we learn of such collection without consent, we will delete it.</p>
-    
-    <h2>8. Policy updates</h2>
-    <p>We may revise this Privacy Policy at any time. Changes take effect when posted.</p>
-  </div>
+  <main class="wrap">
+    <!-- WHY CHOOSE US -->
+    <section class="why-section">
+      <div class="why-choose">
+        <div class="content">
+          <h4>Why Choose Us?</h4>
+          <h2>Your Trusted Partner for Visa Success</h2>
+          <div class="why-list">
+            <div class="item">
+              <strong>Fast & Reliable Service</strong>
+              <div class="small muted">We move quickly while maintaining accuracy, ensuring your visa process stays on track.</div>
+            </div>
+            <div class="item">
+              <strong>Step-by-step Guidance</strong>
+              <div class="small muted">From document preparation to embassy submission, we're with you at every step.</div>
+            </div>
+            <div class="item">
+              <strong>Expert-Led</strong>
+              <div class="small muted">Applications are handled by trained visa consultants, not software.</div>
+            </div>
+            <div class="item">
+              <strong>Hands-On Review</strong>
+              <div class="small muted">We check your documents before anything is submitted.</div>
+            </div>
+          </div>
+        </div>
+        <div class="media">
+          <img src="visa1.jpg" alt="Expert visa consultation" />
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">

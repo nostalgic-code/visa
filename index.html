@@ -162,6 +162,9 @@
     .logo-ico {
       width: 60px;
       height: 60px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
     .brand {
       display: flex;
@@ -361,7 +364,7 @@
       color:var(--primary);
       font-weight:700;
       margin-bottom:12px;
-      font-size:15px;
+      font-size:40px;
       letter-spacing:0.5px
     }
     .about h2{
@@ -390,6 +393,35 @@
       position:relative;
       z-index:1;
     }
+    .services h2{
+      font-size:56px;
+      font-weight:800;
+      color:#e89438;
+      text-align:center;
+      margin-bottom:20px;
+    }
+    .about-more-content{
+      display:none;
+      margin-top:16px;
+    }
+    .about-more-content.show{
+      display:block;
+    }
+    .read-more-btn{
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      padding:10px 20px;
+      border-radius:8px;
+      font-weight:600;
+      cursor:pointer;
+      margin-top:16px;
+      transition:all 0.3s ease;
+    }
+    .read-more-btn:hover{
+      background:var(--accent);
+      transform:translateY(-2px);
+    }
     .services-grid{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
@@ -398,8 +430,8 @@
     }
     .service-card{
       background:var(--card);
-      padding:32px;
-      border-radius:24px;
+      padding:24px;
+      border-radius:18px;
       box-shadow:var(--shadow);
       transition:all 0.3s ease;
       opacity:0;
@@ -425,31 +457,29 @@
       color:#fff
     }
     .service-card .icon{
-      width:48px;
-      height:48px;
-      background:rgba(85,136,139,0.1);
-      border-radius:14px;
+      width:40px;
+      height:40px;
       display:flex;
       align-items:center;
       justify-content:center;
-      margin-bottom:20px;
-      font-size:24px;
+      margin-bottom:16px;
+      font-size:20px;
       color: var(--primary);
       flex-shrink: 0;
     }
     .service-card.featured .icon{
-      background:rgba(255,255,255,0.2)
+      color:#fff;
     }
     .service-card h4{
-      margin:0 0 12px;
-      font-size:20px;
+      margin:0 0 10px;
+      font-size:18px;
       line-height:1.3;
       color:#e89438
     }
     .service-card p{
       color:var(--muted);
-      font-size:15px;
-      line-height:1.6;
+      font-size:14px;
+      line-height:1.5;
       margin:0;
       flex-grow: 1;
     }
@@ -509,7 +539,7 @@
       color:var(--primary);
       font-weight:700;
       margin:0 0 12px;
-      font-size:15px;
+      font-size:40px;
       letter-spacing:0.5px
     }
     .why-choose h2{
@@ -686,6 +716,26 @@
     }
     .faq-item:hover {
       box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
+    .faq-item.hidden {
+      display: none;
+    }
+    .faq-toggle-btn {
+      display: block;
+      margin: 40px auto 0;
+      padding: 14px 32px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .faq-toggle-btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
     }
     .faq-question {
       width: 100%;
@@ -1517,8 +1567,8 @@
       </button>
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="services.html">Services</a>
-        <a href="#why">Why</a>
+        <a href="our-services.html">Services</a>
+        <a href="why-choose-us.html">Why Us</a>
         <a href="#process">Process</a>
         <a class="btn-ghost" href="contact.html">Contact</a>
   <button class="btn-primary mobile-only" id="mobileConsultBtn">Consult Our Experts</button>
@@ -1649,142 +1699,16 @@
         <h2>Professional Visa Consulting — Handled by Experts</h2>
         <p class="muted">Amahle VisaPro Solutions is a consultant-led visa advisory firm providing personalized, hands-on support to individuals, families, students, and professionals.</p>
         
-        <p class="muted">We are not an online self-service platform. Every visa application is managed by an experienced consultant who works directly with you — from eligibility assessment and document preparation to final submission guidance.</p>
+        <div class="about-more-content" id="aboutMoreContent">
+          <p class="muted">We are not an online self-service platform. Every visa application is managed by an experienced consultant who works directly with you — from eligibility assessment and document preparation to final submission guidance.</p>
+          
+          <p class="muted">We specialize in business, tourist, student, family, and work permit visas, ensuring each application is carefully reviewed, accurately prepared, and submitted with attention to detail. Our role is to reduce risk, prevent costly mistakes, and give you clarity throughout the process.</p>
+        </div>
         
-        <p class="muted">We specialize in business, tourist, student, family, and work permit visas, ensuring each application is carefully reviewed, accurately prepared, and submitted with attention to detail. Our role is to reduce risk, prevent costly mistakes, and give you clarity throughout the process.</p>
-   
-        
-        
+        <button class="read-more-btn" id="readMoreBtn" onclick="toggleAboutContent()">Read More</button>
       </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- SERVICES -->
-    <section id="services" class="services wrap">
-      <h2>Our Visa Consulting Services</h2>
-      <div class="services-grid">
-        <div class="service-card featured">
-          <div class="icon">🌍</div>
-          <h4>Tourist Visa Applications</h4>
-          <p>Expert assistance with tourist visa applications for all major destinations. We handle the entire process to ensure a smooth and successful application.</p>
-          <ul class="features" style="margin: 20px 0 16px 0; padding: 0 0 0 18px; color: #fff; font-size: 1rem; line-height: 1.7;">
-            <li>✔️ Fast processing</li>
-            <li>✔️ All major destinations</li>
-            <li>✔️ Personalized support</li>
-          </ul>
-          <button class="btn-primary" style="margin-top: auto; background: #fff; color: #e89438; font-weight: bold; border-radius: 8px; padding: 10px 24px; border: none; cursor: pointer;">Apply Now</button>
-        </div>
-        <div class="service-card">
-          <div class="icon">🎓</div>
-          <h4>Student Visa Applications</h4>
-          <p>Comprehensive support for students pursuing education abroad, including application guidance and documentation.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">💼</div>
-          <h4>Business Visa Support</h4>
-          <p>For professionals and companies traveling for meetings, investments, or commercial activities.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">👥</div>
-          <h4>One-on-One Consultations</h4>
-          <p>Personalized visa consulting sessions to discuss your specific situation and develop the best strategy.</p>
-        </div>
-        <div class="service-card wide">
-          <div class="icon">⚖️</div>
-          <h4>Work Permit & Employment Visa Support</h4>
-          <p>For individuals who already have confirmed employment or an approved work authorization from an overseas employer.</p>
-        </div>
-        
-        <div class="service-card">
-          <div class="icon">📄</div>
-          <h4>Family & Dependent Visa Support</h4>
-          <p>For spouses, children, and family reunification applications.</p>
-        </div>
-        
-      </div>
-    </section>
-
-
-    <!-- WHY CHOOSE US -->
-    <section id="why" class="why-section">
-      <div class="why-choose wrap">
-        <div class="content">
-          <h4>Why Choose Us?</h4>
-          <h2>Your Trusted Partner for Visa Success</h2>
-          <div class="why-list">
-            <div class="item">
-              <strong>Fast & Reliable Service</strong>
-              <div class="small muted">We move quickly while maintaining accuracy, ensuring your visa process stays on track.</div>
-            </div>
-            <div class="item">
-              <strong>Step-by-step Guidance</strong>
-              <div class="small muted">From document preparation to embassy submission, we're with you at every step.</div>
-            </div>
-            <div class="item">
-              <strong>Expert-Led</strong>
-              <div class="small muted">Applications are handled by trained visa consultants, not software.</div>
-            </div>
-            <div class="item">
-              <strong>Hands-On Review</strong>
-              <div class="small muted">We check your documents before anything is submitted.</div>
-            </div>
-          </div>
-          <a class="btn-primary" href="#" id="whyConsultBtn">Talk to Your Dedicated Consultant</a>
-        </div>
-        <div class="media">
-          <img src="visa1.jpg" alt="Expert visa consultation" />
-        </div>
-      </div>
-    </section>
-
-
-    <!-- WORK PROCESS -->
-    <section id="process" class="process-section wrap">
-      <div class="media">
-        <img src="visa3.jpg" alt="Our streamlined process" />
-      </div>
-      <div class="content">
-        <h4>Our Work Process</h4>
-        <h2>How We Make Your Visa Journey Smooth</h2>
-        <div class="process-cards">
-          <div class="step">
-            <div class="num">01</div>
-            <div class="text">
-              <h4>Initial Consultation</h4>
-              <p>We discuss your goals, review your background, and identify required documents.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="num">02</div>
-            <div class="text">
-              <h4>Tailored Strategy</h4>
-              <p>We create a personalized application strategy and comprehensive checklist.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="num">03</div>
-            <div class="text">
-              <h4>Submission & Follow-up</h4>
-              <p>We handle the submission process and follow up until your visa is approved.</p>
-            </div>
-          </div>
-        </div>
-  <a class="btn-primary" href="#" id="processConsultBtn">Start Your Journey</a>
-      </div>
-    </section>
 
     <!-- FAQ SECTION -->
     <section class="faq-section wrap">
@@ -1812,31 +1736,32 @@
           <div class="faq-answer">A single entry visa allows only one entry into a country, becoming void after you leave, while a multiple entry visa permits several entries and exits within its validity period.</div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item hidden">
           <button class="faq-question">Will my visa be guaranteed?</button>
           <div class="faq-answer">No, a visa is never guaranteed, even after approval.</div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item hidden">
           <button class="faq-question">What is an eTA?</button>
           <div class="faq-answer">Electronic Travel Authorization is an entry requirement for visa-exempt foreign nationals linked to a traveller's passport.</div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item hidden">
           <button class="faq-question">Can I apply for a visa from any country even if I am not a citizen of that country?</button>
           <div class="faq-answer">Yes, you can but you are required to be a legal resident of that country (e.g., work permit, student long-term visa).</div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item hidden">
           <button class="faq-question">Can I get an emergency visa?</button>
           <div class="faq-answer">Yes, you can but there are specific rules for different countries.</div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item hidden">
           <button class="faq-question">Who processes visa applications?</button>
           <div class="faq-answer">They are processed by the immigration authorities of the destination country, often through their embassies.</div>
         </div>
       </div>
+      <button class="faq-toggle-btn" id="faqToggleBtn" onclick="toggleFAQs()">Show More FAQs</button>
     </section>
 
 
@@ -1979,7 +1904,6 @@
             <h4>Company</h4>
             <a href="#about">About Us</a>
             <a href="#team">Our Team</a>
-            <a href="#testimonials">Reviews</a>
             <a href="terms.html">Terms & Conditions</a>
             <a href="privacy.html">Privacy Policy</a>
             <a href="disclaimer.html">Disclaimer</a>
@@ -2042,6 +1966,38 @@
         }
       });
     });
+    
+    // Toggle About Section Read More
+    function toggleAboutContent() {
+      const content = document.getElementById('aboutMoreContent');
+      const btn = document.getElementById('readMoreBtn');
+      
+      if (content.classList.contains('show')) {
+        content.classList.remove('show');
+        btn.textContent = 'Read More';
+      } else {
+        content.classList.add('show');
+        btn.textContent = 'Read Less';
+      }
+    }
+    
+    // Toggle FAQs Show More/Less
+    function toggleFAQs() {
+      const hiddenFAQs = document.querySelectorAll('.faq-item.hidden');
+      const btn = document.getElementById('faqToggleBtn');
+      
+      if (hiddenFAQs.length > 0 && hiddenFAQs[0].style.display === 'block') {
+        hiddenFAQs.forEach(faq => {
+          faq.style.display = 'none';
+        });
+        btn.textContent = 'Show More FAQs';
+      } else {
+        hiddenFAQs.forEach(faq => {
+          faq.style.display = 'block';
+        });
+        btn.textContent = 'Show Less FAQs';
+      }
+    }
   </script>
 </body>
 </html>
