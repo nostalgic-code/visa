@@ -297,17 +297,21 @@ def logout():
 @dashboard_bp.route('/admin')
 @login_required
 def index():
-    """Dashboard home page showing all applications"""
+    """Dashboard home page showing all applications with pagination"""
     try:
-        # Fetch all applications from Supabase (using service key bypasses RLS)
-        result = supabase.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
-        applications = result.data
+        # Get pagination parameters
+        page = request.args.get('page', 1, type=int)
+        per_page = 10
+        
+        # Fetch all applications for stats (using service key bypasses RLS)
+        all_result = supabase.table('visa_applications').select('*').order('submitted_at', desc=True).execute()
+        all_applications = all_result.data
         
         # Calculate stats
-        total = len(applications)
-        new_count = len([a for a in applications if a.get('status') == 'new'])
-        in_progress = len([a for a in applications if a.get('status') == 'in_progress'])
-        completed = len([a for a in applications if a.get('status') == 'completed'])
+        total = len(all_applications)
+        new_count = len([a for a in all_applications if a.get('status') == 'new'])
+        in_progress = len([a for a in all_applications if a.get('status') == 'in_progress'])
+        completed = len([a for a in all_applications if a.get('status') == 'completed'])
         
         stats = {
             'total': total,
@@ -316,7 +320,29 @@ def index():
             'completed': completed
         }
         
-        return render_template('admin/dashboard.html', applications=applications, stats=stats)
+        # Paginate applications
+        start_idx = (page - 1) * per_page
+        end_idx = start_idx + per_page
+        applications = all_applications[start_idx:end_idx]
+        
+        # Calculate pagination info
+        total_pages = (total + per_page - 1) // per_page
+        has_prev = page > 1
+        has_next = page < total_pages
+        
+        pagination = {
+            'page': page,
+            'per_page': per_page,
+            'total': total,
+            'total_pages': total_pages,
+            'has_prev': has_prev,
+            'has_next': has_next,
+            'prev_page': page - 1 if has_prev else None,
+            'next_page': page + 1 if has_next else None,
+            'pages': list(range(1, total_pages + 1))
+        }
+        
+        return render_template('admin/dashboard.html', applications=applications, stats=stats, pagination=pagination)
         
     except Exception as e:
         # Check if JWT expired error
@@ -324,7 +350,20 @@ def index():
         if 'JWT expired' in error_msg or 'PGRST303' in error_msg:
             session.clear()
             return redirect(url_for('dashboard.login'))
-        return render_template('admin/dashboard.html', applications=[], stats={}, error=error_msg)
+        
+        # Return empty data with pagination for error case
+        empty_pagination = {
+            'page': 1,
+            'per_page': 10,
+            'total': 0,
+            'total_pages': 0,
+            'has_prev': False,
+            'has_next': False,
+            'prev_page': None,
+            'next_page': None,
+            'pages': []
+        }
+        return render_template('admin/dashboard.html', applications=[], stats={}, error=error_msg, pagination=empty_pagination)
 
 @dashboard_bp.route('/admin/application/<int:app_id>')
 @login_required
