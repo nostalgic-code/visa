@@ -56,6 +56,7 @@ def submit_visa_application():
         field_mapping = {
             'countryApplyingFrom': 'country_applying_from',
             'passportCountry': 'passport_country',
+            'travelDate': 'travel_date',
             'returnDate': 'return_date',
             'visaType': 'visa_type',
             'communicationMethod': 'communication_method'
@@ -64,7 +65,7 @@ def submit_visa_application():
         # Define fields that exist in the database
         allowed_fields = [
             'name', 'email', 'phone', 'country_applying_from', 
-            'passport_country', 'destination', 'return_date', 
+            'passport_country', 'destination', 'travel_date', 'return_date', 
             'visa_type', 'communication_method', 'message'
         ]
         
