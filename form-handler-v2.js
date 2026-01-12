@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     // Config for different form endpoints - Map to confirmed working endpoints
     const FORM_ENDPOINTS = {
-        'modalApplyForm': '/visa',         // Changed to confirmed working endpoint
+        'modalApplyForm': '/visa',         // Changed to confirmed working endpoint (now used in hero)
         'quickApplyForm': '/visa',         // Changed to confirmed working endpoint
         'visaApplicationForm': '/visa',    // Changed to confirmed working endpoint
         'consultForm': '/visa',            // Changed to confirmed working endpoint
