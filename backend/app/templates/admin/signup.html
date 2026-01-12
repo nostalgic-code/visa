@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Signup - VisaPro Amahle</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #55888b 0%, #e89438 100%);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
         }
+        .logo-container { max-height: 80px; width: auto; margin: 0 auto; }
+        .logo-img { height: 100%; width: auto; max-height: 80px; object-fit: contain; }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl">
+    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-2xl">
         <div>
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <div class="logo-container mb-6">
+                <img src="{{ url_for('static', filename='../../Logo-removebg-preview.png') }}" 
+                     alt="Amahle VisaPro Solutions" 
+                     class="logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <h1 class="text-3xl font-bold text-gray-900 text-center" style="display: none;">Amahle VisaPro</h1>
+            </div>
+            <h2 class="mt-4 text-center text-3xl font-extrabold text-gray-900">
                 Create Admin Account
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600">
