@@ -4,6 +4,7 @@ from datetime import datetime
 from functools import wraps
 from supabase import create_client, Client
 import os
+import pytz
 
 api_bp = Blueprint('api', __name__)
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -84,8 +85,10 @@ def submit_visa_application():
             print(f"  {key}: {value}")
         print("=" * 50)
         
-        # Add timestamp and status
-        filtered_data['submitted_at'] = datetime.utcnow().isoformat()
+        # Add timestamp and status using South African Time (SAST - UTC+2)
+        sa_timezone = pytz.timezone('Africa/Johannesburg')
+        sa_time = datetime.now(sa_timezone)
+        filtered_data['submitted_at'] = sa_time.isoformat()
         filtered_data['status'] = 'new'
         
         # Determine form type from original data
