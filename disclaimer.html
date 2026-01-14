@@ -267,9 +267,103 @@
     .small {font-size:13px}
     .muted {color:var(--muted)}
 
+    /* Mobile Menu Styles */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: auto;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      background-color: rgba(232, 148, 56, 0.1);
+    }
+
+    .mobile-menu-toggle.active {
+      background-color: rgba(232, 148, 56, 0.15);
+    }
+
+    .hamburger {
+      display: block;
+      position: relative;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      margin: 10px 0;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      left: 0;
+    }
+
+    .hamburger::before {
+      top: -8px;
+    }
+
+    .hamburger::after {
+      bottom: -8px;
+    }
+
+    .mobile-menu-toggle.active .hamburger {
+      background: transparent;
+    }
+
+    .mobile-menu-toggle.active .hamburger::before {
+      transform: rotate(45deg);
+      top: 0;
+      background: var(--accent-2);
+    }
+
+    .mobile-menu-toggle.active .hamburger::after {
+      transform: rotate(-45deg);
+      bottom: 0;
+      background: var(--accent-2);
+    }
+
+    .desktop-only {
+      display: block;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
     @media (max-width:980px) {
       header.site-head {
         padding: 16px 0;
+        justify-content: space-between;
       }
       .logo-ico {
         width: 50px;
@@ -287,13 +381,66 @@
     }
 
     @media (max-width: 768px) {
-      .nav-links {
+      .mobile-menu-toggle {
+        display: flex;
+        position: relative;
+      }
+
+      .desktop-only {
+        display: none;
+      }
+
+      .site-nav {
+        position: static;
+        margin-left: auto;
+      }
+
+      nav.site-nav .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 360px;
+        height: 100vh;
+        background: var(--bg-1);
+        padding: 80px 32px 32px;
         flex-direction: column;
-        gap: 12px;
+        gap: 24px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        z-index: 1000;
+        justify-content: flex-start;
       }
-      nav.site-nav a {
-        font-size: 14px;
+
+      nav.site-nav .nav-links.active {
+        right: 0;
       }
+
+      nav.site-nav .nav-links a {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+        font-size: 18px;
+        padding: 12px 0;
+      }
+
+      nav.site-nav .nav-links.active a {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      nav.site-nav .nav-links a:not(.btn-ghost):after {
+        display: none;
+      }
+
+      nav.site-nav .nav-links .btn-ghost {
+        margin-top: 20px;
+        text-align: center;
+        padding: 14px 20px;
+        width: 100%;
+      }
+
       .footer-content {
         flex-direction: column;
         gap: 40px;
@@ -305,19 +452,20 @@
 
     @media (max-width: 640px) {
       header.site-head {
-        flex-direction: column;
-        gap: 16px;
+        padding: 12px 20px;
       }
       .logo {
-        width: 100%;
-        justify-content: center;
+        gap: 8px;
       }
-      nav.site-nav {
-        width: 100%;
+      .logo-ico {
+        width: 40px;
+        height: 40px;
       }
-      .nav-links {
-        justify-content: center;
-        flex-wrap: wrap;
+      .brand-title {
+        font-size: 18px;
+      }
+      .brand-title .subtitle {
+        font-size: 12px;
       }
       .container {
         padding: 100px 20px 40px;
@@ -334,6 +482,10 @@
       body {
         font-size: 16px;
       }
+      p, li {
+        font-size: 16px;
+      }
+    }
       p, li {
         font-size: 16px;
       }
@@ -357,6 +509,9 @@
       </div>
     </a>
     <nav class="site-nav">
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="index.html#about">About</a>
@@ -503,6 +658,41 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Add menu overlay to body
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    document.body.appendChild(overlay);
+
+    // Mobile menu functionality
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    }
+    
+    if (menuToggle) {
+      menuToggle.addEventListener('click', toggleMenu);
+    }
+    
+    if (overlay) {
+      overlay.addEventListener('click', toggleMenu);
+    }
+    
+    // Close menu when clicking nav links
+    if (navLinks) {
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (navLinks.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+      });
+    }
   </script>
 </body>
 </html>
