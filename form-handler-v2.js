@@ -12,7 +12,7 @@ $(document).ready(function() {
     };
 
     // Base API URL - Production (use localhost for local development)
-    const API_BASE_URL = 'https://visa-backend-h11c.onrender.com/api';
+    const API_BASE_URL = 'https://visa-api-l1rr.onrender.com/api';
     // const API_BASE_URL = 'http://localhost:5000/api'; // For local development // Use this when deployed to Render
 
     // Reusable form submission handler

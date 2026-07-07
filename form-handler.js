@@ -11,7 +11,7 @@ $(document).ready(function() {
     };
 
     // Base API URL
-    const API_BASE_URL = 'https://visa-vq00.onrender.com/api';
+    const API_BASE_URL = 'https://visa-api-l1rr.onrender.com/api';
 
     // Reusable form submission handler
     function handleFormSubmit($form, endpoint) {

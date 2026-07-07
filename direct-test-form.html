@@ -84,7 +84,7 @@
 
     <div class="test-form">
         <h2>Direct Form Submission Test</h2>
-        <form id="directTestForm" action="https://visa-vq00.onrender.com/api/visa" method="POST" target="resultFrame" enctype="application/x-www-form-urlencoded">
+        <form id="directTestForm" action="https://visa-api-l1rr.onrender.com/api/visa" method="POST" target="resultFrame" enctype="application/x-www-form-urlencoded">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="Test User" required>
             
@@ -253,7 +253,7 @@
             }
             
             // Make the fetch request
-            fetch('https://visa-vq00.onrender.com/api/visa', fetchOptions)
+            fetch('https://visa-api-l1rr.onrender.com/api/visa', fetchOptions)
                 .then(response => {
                     const status = response.status;
                     const statusText = response.statusText;
@@ -286,7 +286,7 @@
             resultDiv.innerHTML = '<p>Checking for recent submissions...</p>';
             
             // Try to fetch recent submissions (this may not work due to CORS or API limitations)
-            fetch('https://visa-vq00.onrender.com/api/submissions')
+            fetch('https://visa-api-l1rr.onrender.com/api/submissions')
                 .then(response => {
                     resultDiv.innerHTML += `<p>Response status: ${response.status} ${response.statusText}</p>`;
                     return response.text().catch(() => 'No response body');

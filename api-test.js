@@ -3,7 +3,7 @@ $(document).ready(function() {
     console.log('API Testing Tool Loaded');
     
     // Base API URL
-    const API_BASE_URL = 'https://visa-vq00.onrender.com';
+    const API_BASE_URL = 'https://visa-api-l1rr.onrender.com';
     
     // Potential endpoints to test
     const TEST_ENDPOINTS = [

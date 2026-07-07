@@ -424,7 +424,7 @@
         <h2>Consult Our Visa Experts</h2>
         <p>Fill out the form below and our team will contact you shortly to discuss your visa needs.</p>
       </div>
-      <form id="consultForm" action="https://visa-vq00.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded">
+      <form id="consultForm" action="https://visa-api-l1rr.onrender.com/api/visa" method="POST" enctype="application/x-www-form-urlencoded">
         <div class="form-group">
           <label for="consult_name">Your Name</label>
           <input type="text" id="consult_name" name="name" required>
@@ -469,7 +469,7 @@
 
         <div class="contact-form">
           <h3>Send us a Message</h3>
-          <form id="contactForm" action="https://visa-vq00.onrender.com/api/contact" method="POST" enctype="application/x-www-form-urlencoded">
+          <form id="contactForm" action="https://visa-api-l1rr.onrender.com/api/contact" method="POST" enctype="application/x-www-form-urlencoded">
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" required>
@@ -619,7 +619,7 @@
           message: document.getElementById('message').value.trim()
         };
         
-        const response = await fetch('https://visa-vq00.onrender.com/api/contact', {
+        const response = await fetch('https://visa-api-l1rr.onrender.com/api/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -657,7 +657,7 @@
             message: document.getElementById('consult_message').value.trim()
           };
           
-          const response = await fetch('https://visa-vq00.onrender.com/api/consult', {
+          const response = await fetch('https://visa-api-l1rr.onrender.com/api/consult', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
